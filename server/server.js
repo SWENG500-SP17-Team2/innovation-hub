@@ -2,9 +2,13 @@ var path = require('path');
 var express = require('express');
 var morgan = require('morgan');
 var chalk = require('chalk');
+var mock = require('./mockData.js');
 
 var app = express();
 var port = process.argv[2] || 8080;
+
+
+
 
 morgan.token('color_status', (req, res) => {
     if (res.statusCode < 300) {
@@ -27,6 +31,11 @@ app.use(morgan(':remote-addr - ' +
     'time=:response-time ms'));
 
 app.use(express.static(path.join(__dirname + '/../dist')));
+
+app.get('/innovations', (req, res) => {
+    res.status(200).json(mock.getInnovations());
+    console.log(mock.getInnovations());
+});
 
 app.listen(port);
 
