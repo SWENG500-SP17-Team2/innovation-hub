@@ -7,14 +7,15 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { store } from './stores/app';
-import MessageDisplay from './components/MessageDisplay';
+import InnovationList from './components/InnovationList';
 
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 class App extends React.Component {
     navMenuClick() {
-        console.log('Nav menu button clicked!');
+        console.log('Nav menu button clicked! Again!');
     }
+
 
     render() {
         const globalFontStyle = {
@@ -25,9 +26,9 @@ class App extends React.Component {
             <MuiThemeProvider muiTheme={lightMuiTheme}>
                 <div style={globalFontStyle}>
                     <AppBar
-                        title="Redux Starter"
+                        title="Innovation Hub"
                         onLeftIconButtonTouchTap={this.navMenuClick} />
-                    <MessageDisplay />
+                    <InnovationList />
                 </div>
             </MuiThemeProvider>
         );

@@ -1,29 +1,22 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    message: 'Hello world!'
+    innovations: [{Name:"Loading...",Description:""}]
 };
 
 const actions = {
-    updateMessage: message => {
-        return {
-            type: 'update_message',
-            message
-        };
-    },
-    resetMessage: () => {
-        return {
-            type: 'reset_message',
-        }
+    updateInnovations: innovations => {
+      return {
+        type: 'update_innovations',
+        innovations
+      };
     }
 };
 
 const app = (state = initialState, action) => {
     switch (action.type) {
-        case 'update_message':
-            return { message: action.message };
-        case 'reset_message':
-            return initialState;
+        case 'update_innovations':
+            return {innovations: action.innovations}
         default:
             return state;
     }

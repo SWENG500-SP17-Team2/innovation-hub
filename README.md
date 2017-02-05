@@ -1,7 +1,6 @@
+
 [![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
 
-# react-redux-md-starter
-React 15.2.1, Redux, Babel, ES6 and Material UI 0.15.2 starter kit
 
 ## Getting started
 
@@ -40,3 +39,5 @@ There are `npm` aliases for common `gulp` tasks as well. They are listed in the 
 * [ES2015 syntax](https://babeljs.io/docs/learn-es2015/)
 * [browserify Docs](https://github.com/substack/node-browserify#usage)
 * [Babel Options](https://babeljs.io/docs/usage/options/)
+
+Starter pack for this website was found [here](https://github.com/YashdalfTheGray/react-redux-md-starter)
