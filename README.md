@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
+
 # react-redux-md-starter
 React 15.2.1, Redux, Babel, ES6 and Material UI 0.15.2 starter kit
 
