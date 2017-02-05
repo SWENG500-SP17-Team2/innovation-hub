@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
+
 
 ## Getting started
 
