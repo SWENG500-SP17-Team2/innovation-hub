@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
 
 
-## Getting started
+## Getting started now
 
 Once the repository has been cloned, run `npm install` to install all the dependencies. This project uses express for the server side code and React, Material UI and ES2015 (through Babel) for the front end. This project also uses gulp to automate tasks.
 
