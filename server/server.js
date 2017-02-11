@@ -3,9 +3,14 @@ var express = require('express');
 var morgan = require('morgan');
 var chalk = require('chalk');
 var mock = require('./mockData.js');
+var bodyParser = require('body-parser');
+
 
 var app = express();
 var port = process.argv[2] || 8080;
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 
@@ -34,9 +39,16 @@ app.use(express.static(path.join(__dirname + '/../dist')));
 
 app.get('/innovations', (req, res) => {
     res.status(200).json(mock.getInnovations());
-    console.log(mock.getInnovations());
 });
 
 app.listen(port);
+
+app.post('/postInnovation', function(req,res) {
+console.log(req.body.name)
+console.log(req.body.description)
+res.sendStatus(200);
+});
+
+
 
 console.log('Server listening on port ' + chalk.green(port));
