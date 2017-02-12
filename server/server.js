@@ -15,23 +15,22 @@ var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
 
 var app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-// Connect to the database before starting the application server.
+
 mongodb.MongoClient.connect(mongoURL, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
 
-  // Save database object from the callback for reuse.
+
   db = database;
   console.log("Database sucessfully connected");
 
-  // Initialize the app.
+
   var server = app.listen(port)
   console.log('Server listening on port ' + chalk.green(port));
 });
@@ -68,10 +67,6 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-/*  "/api/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
- */
 
 app.get("/api/innovations", function(req, res) {
   db.collection(INNOVATIONS_COLLECTION).find({}).toArray(function(err, docs) {
