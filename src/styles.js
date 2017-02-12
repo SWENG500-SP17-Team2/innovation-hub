@@ -10,8 +10,20 @@ const marginLarge = {
     margin: '24px'
 };
 
+const formSubmit = {
+    width: '97%',
+    height: '100px',
+    marginLeft: '16px'
+};
+
+const style = {
+    marginLeft: '20px'
+};
+
 export {
     marginSmall,
     marginMedium,
-    marginLarge
+    marginLarge,
+    style,
+    formSubmit
 };
