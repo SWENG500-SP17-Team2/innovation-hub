@@ -80,16 +80,61 @@ app.get("/api/innovations", function(req, res) {
 
 app.post("/api/innovations", function(req, res) {
   var newInnovation = req.body;
-  newInnovation.createDate = new Date();
+
   if (!req.body.Name) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
-  }
+  } else {
 
-  db.collection(INNOVATIONS_COLLECTION).insertOne(newInnovation, function(err, doc) {
+    newInnovation.CreatedDate = new Date();
+    newInnovation.ModifiedDate = new Date();
+    newInnovation.Comments = [];
+    newInnovation.Likes = [];
+
+
+    db.collection(INNOVATIONS_COLLECTION).insertOne(newInnovation, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create innovation.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+
+app.get("/api/innovations/:id", function(req, res) {
+
+  //TODO Better error message if ID is not found in database
+  db.collection(INNOVATIONS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to create innovation.");
+      handleError(res, err.message, "Failed to get innovation");
     } else {
-      res.status(201).json(doc.ops[0]);
+      res.status(200).json(doc);
+    }
+  });
+});
+
+//TODO Add in this functionality to update an innovation.  Currently this just wipes the innovation and then puts the update in its place.
+// app.put("/api/innovations/:id", function(req, res) {
+//   var updateDoc = req.body;
+//   delete updateDoc._id;
+//   //TODO Change modified date
+//   db.collection(INNOVATIONS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to update innovation");
+//     } else {
+//       updateDoc._id = req.params.id;
+//       res.status(200).json(updateDoc);
+//     }
+//   });
+// });
+
+app.delete("/api/innovations/:id", function(req, res) {
+  db.collection(INNOVATIONS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete innovation");
+    } else {
+      res.status(200).json(req.params.id);
     }
   });
 });
