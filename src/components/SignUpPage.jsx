@@ -1,5 +1,4 @@
 import React from 'react';
-//import SignUpForm from 'SignUpForm';
 
 class SignUpPage extends React.Component {
   constructor(props) {
@@ -40,7 +39,9 @@ class SignUpPage extends React.Component {
 
   // Display the object
   render() {
-    return (
+    return (<h1> Hello from SignUpPage</h1>);
+/*
+    return  (
       <SignUpForm
           onSubmit={this.processForm}
           onChange={this.changeUser}
@@ -48,6 +49,7 @@ class SignUpPage extends React.Component {
           user={this.state.user}
         />
     );
+*/    
   }
 }
 export default SignUpPage;

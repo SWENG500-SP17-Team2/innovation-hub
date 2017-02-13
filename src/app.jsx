@@ -5,10 +5,10 @@ import AppBar from 'material-ui/AppBar';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { browserHistory, Router } from 'react-router';
 
 import { store } from './stores/app';
-import InnovationList from './components/InnovationList';
-import PostIdea from './components/PostIdea';
+import routes from './routes.js';
 
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
@@ -25,12 +25,8 @@ class App extends React.Component {
 
         return (
             <MuiThemeProvider muiTheme={lightMuiTheme}>
-                <div style={globalFontStyle}>
-                    <AppBar
-                        title="Innovation Hub"
-                        onLeftIconButtonTouchTap={this.navMenuClick} />
-                    <InnovationList />
-                    <PostIdea />
+                <div >
+                  <Router history={browserHistory} routes={routes} />
                 </div>
             </MuiThemeProvider>
         );

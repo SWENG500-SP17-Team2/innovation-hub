@@ -1,5 +1,5 @@
 import React from 'react';
-//import {Link} from 'react-router';
+import {Link} from 'react-router';
 import TextField from 'material-ui/TextField';
 import {Card, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -11,13 +11,13 @@ const SignUpForm = ({
     errors,
     user
 }) => (
-    <Card className="loginForm">
+    <Card className="container">
        <form action="/" onSubmit={onSubmit}>
           <h2 className="card-heading">Login</h2>
 
-          {errors.summary && <p className="error-message">{errors.summary}</p>}
+          //{errors.summary && <p className="error-message">{errors.summary}</p>}
 
-          <div className="user-name">
+          <div className="field-line">
              <TextField
                 floatingLabelText="Name"
                 name="name"
@@ -27,7 +27,7 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="user-email">
+          <div className="field-line">
              <TextField
                 floatingLabelText="Email"
                 name="email"
@@ -37,7 +37,7 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="user-password">
+          <div className="field-line">
              <TextField
                 floatingLabelText="Password"
                 name="password"
@@ -48,13 +48,13 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="submit-button">
-             <RaisedButton type="submit" label="Create New Account" primary />
+          <div className="button-line">
+             <RaisedButton type="submit" label="Create New Account"/>
           </div>
 
-          <CardText>Already have an account?
+//          <CardText>Already have an account?
 //            <Link to={'/login'}> Log in</Link>
-          </CardText>
+//          </CardText>
        </form>
     </Card>
 );
