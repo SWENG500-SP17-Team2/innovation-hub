@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import TextField from 'material-ui/TextField';
 import {Card, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import {textCenter } from '../styles';
 
 
 const SignUpForm = ({
@@ -13,9 +14,9 @@ const SignUpForm = ({
 }) => (
     <Card className="container">
        <form action="/" onSubmit={onSubmit}>
-          <h2 className="card-heading">Login</h2>
+          <h2 className="card-heading">Sign Up</h2>
 
-          //{errors.summary && <p className="error-message">{errors.summary}</p>}
+          {errors.summary && <p className="error-message">{errors.summary}</p>}
 
           <div className="field-line">
              <TextField
@@ -49,12 +50,12 @@ const SignUpForm = ({
           </div>
 
           <div className="button-line">
-             <RaisedButton type="submit" label="Create New Account"/>
+             <RaisedButton type="submit" label="Create New Account" primary/>
           </div>
 
-//          <CardText>Already have an account?
-//            <Link to={'/login'}> Log in</Link>
-//          </CardText>
+          <CardText>Already have an account?
+            <Link to={'/login'}> Log in</Link>
+          </CardText>
        </form>
     </Card>
 );
