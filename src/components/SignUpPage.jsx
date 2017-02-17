@@ -31,15 +31,19 @@ class SignUpPage extends React.Component {
   processForm(even) {
     // prevent default action
     event.preventDefault();
+    alert('SignUp information\nname: ' +
+          this.state.user.name +
+          ' \nemail: ' + this.state.user.email +
+          ' \npassword: ' + this.state.user.password );
 
-    console.log('name:', this.state.user.name);
-    console.log('email', this.state.user.email);
-    console.log('password', this.state.user.password);
+    //console.log('name:', this.state.user.name);
+    //console.log('email', this.state.user.email);
+    //console.log('password', this.state.user.password);
   }
 
   // Display the object
   render() {
-    //return (<h1> Hello from SignUpPage</h1>);
+    //return (<h1> Hello from SignUp Page</h1>);
 
     return  (
       <SignUpForm
