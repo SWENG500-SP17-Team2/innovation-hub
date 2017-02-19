@@ -3,5 +3,3 @@ node_js:
   - 7.4.0
   - 6.9.4
 script:
-  - npm test
-  - npm run linter
