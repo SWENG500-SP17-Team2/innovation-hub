@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { store } from './stores/app';
 import InnovationList from './components/InnovationList';
+import PostIdea from './components/PostIdea';
 
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
@@ -29,6 +30,7 @@ class App extends React.Component {
                         title="Innovation Hub"
                         onLeftIconButtonTouchTap={this.navMenuClick} />
                     <InnovationList />
+                    <PostIdea />
                 </div>
             </MuiThemeProvider>
         );
