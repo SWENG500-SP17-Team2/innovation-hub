@@ -32,6 +32,15 @@ There are `npm` aliases for common `gulp` tasks as well. They are listed in the 
 | `gulp watch`   | `npm run watcher` |
 | `gulp lint`    | `npm run linter`  |
 
+## Running the database
+
+You must have MongoDB installed.
+To run the database `gulp start:db`.  This will create a \data folder in the server directory.  To delete all data in the database run `gulp clean:db`;
+
+## Generating Data for the database
+
+A file has been setup to generate fake data for in the database for development.  You can get this by running `gulp insert:data`.  This will delete the database, and then re-add the appropriate data.
+
 ## Useful links
 * [React Docs](https://facebook.github.io/react/docs/getting-started.html)
 * [Redux Homepage](http://redux.js.org/)
