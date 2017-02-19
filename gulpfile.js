@@ -95,7 +95,7 @@ gulp.task('usage', () => {
     gutil.log(usageLines.join(os.EOL));
 });
 
-gulp.task('start', ['build'], () => {
+gulp.task('start', ['build', 'insert:data'], () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
@@ -189,4 +189,10 @@ gulp.task('clean:db', function(cb) {
 
     var command = "mongo innovationHub --eval db.dropDatabase()";
     runCommand(command, "Drop database", cb);
+});
+
+gulp.task('insert:data', ['clean:db'], function(cb) {
+    "use strict";
+
+    runCommand('mongo mockData.js', 'Insert data', cb);
 });
