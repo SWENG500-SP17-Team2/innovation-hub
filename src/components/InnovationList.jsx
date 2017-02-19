@@ -24,8 +24,7 @@ class InnovationList extends React.Component {
     }
 
     componentWillMount() {
-      $.getJSON('/innovations').then(result => {
-        console.log(result)
+      $.getJSON('/api/innovations').then(result => {
         this.setState({
         innovations: result
         });
