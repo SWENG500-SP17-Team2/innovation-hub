@@ -13,15 +13,15 @@ import routes from './routes.js';
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 class App extends React.Component {
-    navMenuClick() {
-        console.log('Nav menu button clicked! Again!');
-    }
+    //navMenuClick() {
+    //    console.log('Nav menu button clicked! Again!');
+    //}
 
 
     render() {
-        const globalFontStyle = {
-            fontFamily: 'Roboto, sans-serif'
-        };
+        //const globalFontStyle = {
+        //    fontFamily: 'Roboto, sans-serif'
+        //};
 
         return (
             <MuiThemeProvider muiTheme={lightMuiTheme}>

@@ -5,8 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { marginMedium, style, formSubmit } from '../styles';
 
 class PostIdea extends React.Component {
-    constructor(props) {
-      super(props);
+    constructor(props, context) {
+      super(props, context);
       this.state = {
         textFieldTitle: '',
         textFieldValue: ''
@@ -25,11 +25,17 @@ class PostIdea extends React.Component {
       this.setState({textFieldTitle: e.target.value});
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+
+       e.preventDefault();
+
        alert('The following innovation idea was submitted\nTITLE: ' +
              this.state.textFieldTitle + ' \nDESCRIPTION: ' + this.state.textFieldValue );
        this.setState({textFieldValue: ''});
        this.setState({textFieldTitle: ''});
+
+       // Make a redirect
+       this.context.router.replace('/Dashboard');
     }
 
     render() {
@@ -53,11 +59,15 @@ class PostIdea extends React.Component {
                      onChange={this.handleTextFieldChange}
                  />
                <br/><br/>
-               <RaisedButton label="Submit" style={style} onClick={this.handleSubmit}/>
+                  <RaisedButton label="Submit" style={style} onClick={this.handleSubmit}/>
                <br/><br/>
             </div>
       );
     }
 }
+
+PostIdea.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 
 export default PostIdea;

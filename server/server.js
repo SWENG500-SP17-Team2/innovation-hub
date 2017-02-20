@@ -1,5 +1,6 @@
 var path = require('path');
 var express = require('express');
+var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var chalk = require('chalk');
 var mock = require('./mockData.js');
@@ -36,6 +37,13 @@ app.get('/innovations', (req, res) => {
     res.status(200).json(mock.getInnovations());
     console.log(mock.getInnovations());
 });
+
+// Tell the app to parse HTTP body messages
+app.use(bodyParser.urlencoded({extended: false}));
+
+// routes
+const authRoutes = require('./auth');
+app.use('/auth', authRoutes);
 
 app.listen(port);
 
