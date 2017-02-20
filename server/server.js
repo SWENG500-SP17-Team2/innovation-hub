@@ -5,6 +5,7 @@ var chalk = require('chalk');
 var bodyParser = require('body-parser');
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
+const authRoutes = require('./routes/auth');
 
 
 
@@ -58,7 +59,8 @@ app.use(morgan(':remote-addr - ' +
 
 app.use(express.static(path.join(__dirname + '/../dist')));
 
-
+// routes
+app.use('/auth', authRoutes);
 
 var INNOVATIONS_COLLECTION = "innovations";
 var COMMENTS_COLLECTION = "comments";
