@@ -5,36 +5,39 @@ var chalk = require('chalk');
 var bodyParser = require('body-parser');
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
-const authRoutes = require('./routes/auth');
-
-
+const config = require('./config');
+const passport = require('passport');
 
 var port = process.argv[2] || 8080;
-var databaseName = 'innovationHub';
-var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
 
+// connect to the database and load models
+require('./models').connect(config.dbUri);
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var db;
+
+//var databaseName = 'innovationHub';
+//var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
+
+//var db;
 
 
-mongodb.MongoClient.connect(mongoURL, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-
-  db = database;
-  console.log("Database sucessfully connected");
-
-
-  var server = app.listen(port)
-  console.log('Server listening on port ' + chalk.green(port));
-});
+// mongodb.MongoClient.connect(mongoURL, function (err, database) {
+//   if (err) {
+//     console.log(err);
+//     process.exit(1);
+//   }
+//
+//
+//   db = database;
+//   console.log("Database sucessfully connected");
+//
+//
+//   var server = app.listen(port)
+//   console.log('Server listening on port ' + chalk.green(port));
+// });
 
 
 morgan.token('color_status', (req, res) => {
@@ -59,8 +62,29 @@ app.use(morgan(':remote-addr - ' +
 
 app.use(express.static(path.join(__dirname + '/../dist')));
 
+// pass the passport middleware
+app.use(passport.initialize());
+
+// load passport strategies
+const localSignupStrategy = require('./passport/local-signup');
+const localLoginStrategy = require('./passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
 // routes
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
 app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
+
+
+
+app.listen(port)
+console.log('Server listening on port ' + chalk.green(port));
 
 var INNOVATIONS_COLLECTION = "innovations";
 var COMMENTS_COLLECTION = "comments";

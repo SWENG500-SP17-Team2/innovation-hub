@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, CardTitle } from 'material-ui/Card';
+import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import { marginMedium, textCenter } from '../styles';
+import FlatButton from 'material-ui/FlatButton';
+import {Link} from 'react-router';
 
 const HomePage = () => (
   <Card className="container"  style={marginMedium}>
