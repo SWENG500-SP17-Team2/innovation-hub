@@ -32,7 +32,7 @@ class SignUpPage extends React.Component {
   processForm(event) {
     // prevent default action
     event.preventDefault();
-    
+
     alert('SignUp information\nname: ' +
           this.state.user.name +
           ' \nemail: ' + this.state.user.email +

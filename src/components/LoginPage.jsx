@@ -86,8 +86,8 @@ class LoginPage extends React.Component {
         });
       }
     });
-    xhr.send(formData);
 
+    xhr.send(formData);
 }
 
   // Display the object

@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
 
 
-## Getting started
+## Getting started now
 
 Once the repository has been cloned, run `npm install` to install all the dependencies. This project uses express for the server side code and React, Material UI and ES2015 (through Babel) for the front end. This project also uses gulp to automate tasks.
 
@@ -31,6 +31,15 @@ There are `npm` aliases for common `gulp` tasks as well. They are listed in the 
 | `gulp serve`   | `npm run server`  |
 | `gulp watch`   | `npm run watcher` |
 | `gulp lint`    | `npm run linter`  |
+
+## Running the database
+
+You must have MongoDB installed.
+To run the database `gulp start:db`.  This will create a \data folder in the server directory.  To delete all data in the database run `gulp clean:db`;
+
+## Generating Data for the database
+
+A file has been setup to generate fake data for in the database for development.  You can get this by running `gulp insert:data`.  This will delete the database, and then re-add the appropriate data.
 
 ## Useful links
 * [React Docs](https://facebook.github.io/react/docs/getting-started.html)

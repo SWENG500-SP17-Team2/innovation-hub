@@ -12,6 +12,40 @@ const eslint = require('gulp-eslint');
 const tape = require('gulp-tape');
 const tapMin = require('tap-min');
 const babel = require('gulp-babel');
+const mkdirs = require('mkdirs');
+const spawn = require('child_process').spawn;
+
+var commandBuilder = function(command) {
+    "use strict";
+
+    var cmd = {};
+    var cmdArr = command.split(' ');
+    cmd.exec = cmdArr.shift();
+    cmd.args = cmdArr;
+    return cmd;
+};
+
+var runCommand = function(command, description, cb) {
+    "use strict";
+
+    if (typeof command.exec === 'undefined') {
+        command = commandBuilder(command);
+    }
+
+    var child = spawn(command.exec, command.args);
+    child.stdout.on('data', function(data) {
+        process.stdout.write(data);
+    });
+    child.stderr.on('data', function(data) {
+        process.stdout.write(chalk.red(data));
+    });
+    child.on('exit', function(exitCode) {
+        console.log(chalk.yellow(description + " exited with " + exitCode));
+        cb(exitCode);
+    });
+
+    return child;
+};
 
 gulp.task('default', ['usage']);
 
@@ -53,12 +87,15 @@ gulp.task('usage', () => {
         '',
         chalk.green('clean:all'),
         '\truns both ' + chalk.green('clean:dist') + ' and ' + chalk.green('clean:modules') + '.',
-        ''
+        '',
+        chalk.green('start:db'),
+        '\tStarts the MongoDB database.',
+        '',
     ];
     gutil.log(usageLines.join(os.EOL));
 });
 
-gulp.task('start', ['build'], () => {
+gulp.task('start', ['build', 'insert:data'], () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
@@ -136,3 +173,26 @@ gulp.task('clean:modules', () => {
 gulp.task('clean:all', ['clean:dist', 'clean:modules']);
 
 gulp.task('clean', ['clean:dist']);
+
+gulp.task('start:db', function(cb) {
+    "use strict";
+
+    var command = 'mongod --config ./server/mongoConfig.conf';
+    mkdirs('server/data/db');
+    mkdirs('server/data/log');
+    runCommand(command, "Mongodb server", cb);
+    gutil.log('Mongodb server is now ' + chalk.green('running') + '.');
+});
+
+gulp.task('clean:db', function(cb) {
+    "use strict";
+
+    var command = "mongo innovationHub --eval db.dropDatabase()";
+    runCommand(command, "Drop database", cb);
+});
+
+gulp.task('insert:data', ['clean:db'], function(cb) {
+    "use strict";
+
+    runCommand('mongo mockData.js', 'Insert data', cb);
+});
