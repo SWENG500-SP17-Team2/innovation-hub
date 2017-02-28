@@ -33,16 +33,16 @@ class SignUpPage extends React.Component {
     // prevent default action
     event.preventDefault();
 
-    alert('SignUp information\nname: ' +
-          this.state.user.name +
-          ' \nemail: ' + this.state.user.email +
-          ' \npassword: ' + this.state.user.password );
+    //alert('SignUp information\nname: ' +
+    //      this.state.user.name +
+    //      ' \nemail: ' + this.state.user.email +
+    //      ' \npassword: ' + this.state.user.password );
 
     // Create a string for an HTTP body message
     const name = encodeURIComponent(this.state.user.name);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
-    const formData = `name=${name}&email=${email}&password${password}`;
+    const formData = `name=${name}&email=${email}&password=${password}`;
 
     // Create an AJAX request
     const xhr = new XMLHttpRequest();
@@ -71,6 +71,10 @@ class SignUpPage extends React.Component {
 
           const errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
+          alert('SignUp ERROR (information\nname: ' +
+                this.state.user.name +
+                ' \nemail: ' + this.state.user.email +
+                ' \npassword: ' + this.state.user.password + ')');
 
           this.setState({errors});
        }
