@@ -9,9 +9,10 @@ import IconButton from 'material-ui/IconButton';
 import { topBar, topBarLeft, topBarRight } from '../styles';
 import LocalAuth from '../modules/LocalAuth';
 import NavigationHome from 'material-ui/svg-icons/action/home';
+import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+
 
 const TopBase = ({children}) => (
-  <MuiThemeProvider>
   <div>
     <AppBar title = "Innovation Hub"
       iconElementLeft={
@@ -26,6 +27,9 @@ const TopBase = ({children}) => (
          </Link>
          <Link to="/logout">
            <FlatButton label="Sign out"/>
+         </Link>
+         <Link to="/ProfilePage">
+           <IconButton><AccountCircle /></IconButton>
          </Link>
         </div>
       ) : (
@@ -43,7 +47,6 @@ const TopBase = ({children}) => (
 
        {children}
   </div>
-</MuiThemeProvider>
 
 );
 
