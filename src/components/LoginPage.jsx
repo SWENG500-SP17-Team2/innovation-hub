@@ -73,7 +73,8 @@ class LoginPage extends React.Component {
               ' \ntoken: ' + xhr.response.token);
 */
         // change the current URL to /
-        this.context.router.replace('/Dashboard');
+        //this.context.router.replace('/Dashboard');
+        this.context.router.replace('/Admin');
       } else {
         // failure
 

@@ -5,6 +5,7 @@ import SignUpPage from './components/SignUpPage';
 import PostIdea from './components/PostIdea';
 import InnovationList from './components/InnovationList';
 import LocalAuth from './modules/LocalAuth';
+import Admin from './components/Admin';
 
 const routes = {
    // Base component (wrapper for the whole application)
@@ -17,6 +18,7 @@ const routes = {
               callback(null, InnovationList);
            } else {
               callback(null, HomePage);
+              //callback(null, Admin);
            }
         }
      },
@@ -24,6 +26,7 @@ const routes = {
      {path: '/signup', component: SignUpPage},
      {path: '/NewPost', component: PostIdea},
      {path: '/Dashboard', component: InnovationList},
+     {path: '/Admin', component: Admin},
      {path: '/logout',
         onEnter: (nextState, replace) => {
            LocalAuth.deauthenticateUser();
