@@ -161,7 +161,17 @@ app.delete("/api/innovations/:id", function(req, res) {
 ////////////
 
 
-
+app.get('/api/user_data', function(req, res) {
+            //console.log(req.user.name);
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.status(200).json({username: "undefined user"});
+            } else {
+                res.status(200).json({
+                    username: req.user
+                });
+            }
+});
 
 app.post("/api/comments", function(req, res) {
   var newComment = req.body;

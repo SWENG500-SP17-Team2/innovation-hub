@@ -31,6 +31,15 @@ const topBar = {
     backgroundColor: 'darkturquoise'
 };
 
+const ProfileStyle = {
+  margin: 20,
+};
+
+const FaceIconStyle = {
+  height: 20,
+  width: 20,
+};
+
 const topBarLeft = {
     fontSize: '1.5em',
     float: 'left',
@@ -51,5 +60,7 @@ export {
     topBar,
     topBarLeft,
     topBarRight,
-    formSubmit
+    formSubmit,
+    ProfileStyle,
+    FaceIconStyle
 };

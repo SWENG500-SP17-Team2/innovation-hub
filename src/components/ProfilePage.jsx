@@ -1,30 +1,36 @@
 import React from 'react';
-import { Card, CardTitle, CardHeader, CardText, CardActions } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import { Tabs, Tab } from 'material-ui/Tabs';
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import ProfileView from './ProfileView';
 
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: "default user name"
     };
+
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
+
+  componentDidMount() {
+
+    $.getJSON("api/user_data", function(data) {
+        // Make sure the data contains the username as expected before using it
+        if (data.hasOwnProperty('username')) {
+            console.log('Usrename: ' + data.username);
+            this.setState({
+               userName: data.username
+            });
+        }
+    }.bind(this));
+
+  }
+
   render() {
     return(
       <div>
-        <Card>
-          <CardHeader
-          avatar="http://images.athlonsports.com/d/40190-2/pennstate.jpg"
-          title="test"
-          subtitle="testing"
-          />
-        </Card>
-        <Tabs>
-          <Tab label="Ideas" />
-          <Tab label="Statistics" />
-        </Tabs>
+        <ProfileView
+          userName={this.state.userName}
+        />
       </div>
     );
   }
