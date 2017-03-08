@@ -35,7 +35,8 @@ class PostIdea extends React.Component {
        this.setState({textFieldTitle: ''});
 
        // Make a redirect
-       this.context.router.replace('/Dashboard');
+       //this.context.router.replace('/Dashboard');
+       this.context.router.replace('/Admin');
     }
 
     render() {

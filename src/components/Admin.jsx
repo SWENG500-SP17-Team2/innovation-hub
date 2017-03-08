@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import {Table, Column, Cell} from 'fixed-data-table';
+import LocalAuth from '../modules/LocalAuth';
 
 class Admin extends React.Component {
     constructor(props) {
@@ -13,17 +14,37 @@ class Admin extends React.Component {
         this.state = {
           rows : [{"id":1,"name":"William Elliott","email":"welliott0@bvw.com","status":"Active"},
                   {"id":2,"name":"Carl Ross","email":"cross1@bvw.com","status":"Active"},
-                  {"id":3,"name":"Jeremy Scott","email":"jscott2@bvw.com","status":"Active"},]
-                  // more data
+                  {"id":3,"name":"Jeremy Scott","email":"jscott2@bvw.com","status":"Active"},],
+                   // more data
+          secretData: ''
           };
     }
 
     handleSelect(index, last) {
-       console.log('Selected tab: ' + index + ', Last tab: ' + last);
+       console.log ('handleSelect is invoke');
+       //console.log('Selected tab: ' + index + ', Last tab: ' + last);
+       if(index === 0) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('get', '/api/users');
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          // set the authorization HTTP header
+          xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+          xhr.responseType = 'json';
+          xhr.addEventListener('load', () => {
+             if (xhr.status === 200) {
+                this.setState({
+                   secretData: xhr.response.message
+                 });
+                 console.log('secretData: ' + xhr.response.message);
+              }
+          });
+
+          xhr.send();
+       }
     }
 
     render() {
-
+      //console.log('secretData: ' + secretData);
       return (
         <div>
           <Card className="container"  style={marginMedium}>
@@ -57,7 +78,7 @@ class Admin extends React.Component {
                </TabPanel>
 
                <TabPanel>
-                 <h3>Displaying complaints reported by users</h3>
+                 <h3>Displaying User Reports</h3>
                </TabPanel>
 
                <TabPanel>

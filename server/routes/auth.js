@@ -85,6 +85,7 @@ router.post('/signup', (req, res, next) => {
     });
   }
 
+  console.log('ENTERING signup post');
 
   return passport.authenticate('local-signup', (err) => {
     if (err) {
@@ -111,10 +112,13 @@ router.post('/signup', (req, res, next) => {
       message: 'You have successfully signed up! Now you should be able to log in.'
     });
   })(req, res, next);
+
+  console.log('EXITING signup post');
 });
 
 router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
+
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -123,6 +127,7 @@ router.post('/login', (req, res, next) => {
     });
   }
 
+  console.log('ENTERING login post');
 
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
@@ -147,6 +152,9 @@ router.post('/login', (req, res, next) => {
       user: userData
     });
   })(req, res, next);
+
+  console.log('EXITING login post');
+
 });
 
 module.exports = router;

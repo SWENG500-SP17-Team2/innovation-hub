@@ -16,30 +16,9 @@ require('./models').connect(config.dbUri);
 
 var app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-//var databaseName = 'innovationHub';
-//var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
-
-//var db;
-
-
-// mongodb.MongoClient.connect(mongoURL, function (err, database) {
-//   if (err) {
-//     console.log(err);
-//     process.exit(1);
-//   }
-//
-//
-//   db = database;
-//   console.log("Database sucessfully connected");
-//
-//
-//   var server = app.listen(port)
-//   console.log('Server listening on port ' + chalk.green(port));
-// });
-
+// Tell the app to parse HTTP body messages
+app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 morgan.token('color_status', (req, res) => {
     if (res.statusCode < 300) {
@@ -69,16 +48,14 @@ app.use(passport.initialize());
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
+const localQueryStrategy = require('./passport/local-query');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('local-query', localQueryStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
-
-// Tell the app to parse HTTP body messages
-app.use(bodyParser.urlencoded({extended: false}));
-
 
 // routes
 const authRoutes = require('./routes/auth');

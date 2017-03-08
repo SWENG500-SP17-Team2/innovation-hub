@@ -18,6 +18,8 @@ module.exports = new PassportLocalStrategy({
     password: password.trim()
   };
 
+  console.log('ENTERING local-login');
+
   // find a user by email address
   return User.findOne({ email: userData.email }, (err, user) => {
     if (err) { return done(err); }
@@ -53,4 +55,7 @@ module.exports = new PassportLocalStrategy({
       return done(null, token, data);
     });
   });
+
+  console.log('EXITING local-login');
+
 });

@@ -47,9 +47,6 @@ class LoginPage extends React.Component {
     const password = encodeURIComponent(this.state.user.password);
     const formData = `email=${email}&password=${password}`;
 
-    alert('Login information\nemail: ' +
-          this.state.user.email + ' \npassword: ' + this.state.user.password );
-
     // create an AJAX request
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/login');
@@ -66,15 +63,15 @@ class LoginPage extends React.Component {
         this.setState({
           errors: {}
         });
-/*
-        alert('Login information\nemail: ' +
-              this.state.user.email +
-              ' \npassword: ' + this.state.user.password +
+
+        alert('Welcome  ' +
+              xhr.response.user.name +
+              ' \n ' + xhr.response.message +
               ' \ntoken: ' + xhr.response.token);
-*/
+
         // change the current URL to /
-        //this.context.router.replace('/Dashboard');
-        this.context.router.replace('/Admin');
+        this.context.router.replace('/Dashboard');
+        //this.context.router.replace('/Admin');
       } else {
         // failure
 

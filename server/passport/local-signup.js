@@ -16,11 +16,12 @@ module.exports = new PassportLocalStrategy({
     password: password.trim(),
     name: req.body.name.trim()
   };
-
+  console.log('ENTERING local-signup');
   const newUser = new User(userData);
   newUser.save((err) => {
     if (err) { return done(err); }
 
     return done(null);
   });
+  console.log('EXITING local-signup');
 });
