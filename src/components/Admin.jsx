@@ -24,22 +24,26 @@ class Admin extends React.Component {
        console.log ('handleSelect is invoke');
        //console.log('Selected tab: ' + index + ', Last tab: ' + last);
        if(index === 0) {
+          // Query all users
+          const email = encodeURIComponent('user@aol.com');
+          const formData = `email=${email}`;
+
+          // create an AJAX request
           const xhr = new XMLHttpRequest();
-          xhr.open('get', '/api/users');
+          xhr.open('post', '/query/users');
           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-          // set the authorization HTTP header
-          xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
           xhr.responseType = 'json';
           xhr.addEventListener('load', () => {
              if (xhr.status === 200) {
-                this.setState({
-                   secretData: xhr.response.message
-                 });
-                 console.log('secretData: ' + xhr.response.message);
+                //this.setState({
+                //   secretData: xhr.response.message
+                // });
+                 console.log('secretMessage: ' + xhr.response.message +
+                             '\nusername: ' + xhr.response.queryUser.name);
               }
           });
 
-          xhr.send();
+          xhr.send(formData);
        }
     }
 

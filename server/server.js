@@ -60,8 +60,10 @@ app.use('/api', authCheckMiddleware);
 // routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+const queryRoutes = require('./routes/query');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/query', queryRoutes);
 
 app.listen(port)
 console.log('Server listening on port ' + chalk.green(port));

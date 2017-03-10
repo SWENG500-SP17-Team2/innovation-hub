@@ -64,8 +64,8 @@ class LoginPage extends React.Component {
           errors: {}
         });
 
-        alert('Welcome  ' +
-              xhr.response.user.name +
+        console.log('Welcome  ' +
+              xhr.response.loginUser.name +
               ' \n ' + xhr.response.message +
               ' \ntoken: ' + xhr.response.token);
 
@@ -90,7 +90,6 @@ class LoginPage extends React.Component {
 
   // Display the object
   render() {
-    //return (<h1> Hello from Login Page</h1>);
 
     return  (
       <LoginForm
