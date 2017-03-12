@@ -44,7 +44,7 @@ const ProfileView = ({userName}) => (
 )
 
 ProfileView.propTypes ={
-  userName: PropTypes.object.isRequired
+  userName: PropTypes.string.isRequired
 };
 
 export default ProfileView;

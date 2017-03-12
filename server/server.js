@@ -161,7 +161,7 @@ app.delete("/api/innovations/:id", function(req, res) {
 ////////////
 
 
-app.get('/api/user_data', function(req, res) {
+app.get('/user_data', function(req, res) {
             //console.log(req.user.name);
             if (req.user === undefined) {
                 // The user is not logged in

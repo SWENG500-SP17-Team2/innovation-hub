@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileView from './ProfileView';
+import LocalAuth from '../modules/LocalAuth';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -8,20 +9,27 @@ class ProfilePage extends React.Component {
       userName: "default user name"
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
+    //this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
 
-    $.getJSON("api/user_data", function(data) {
-        // Make sure the data contains the username as expected before using it
-        if (data.hasOwnProperty('username')) {
-            console.log('Usrename: ' + data.username);
-            this.setState({
-               userName: data.username
-            });
-        }
-    }.bind(this));
+    // $.getJSON("/user_data", function(data) {
+    //     // Make sure the data contains the username as expected before using it
+    //     if (data.hasOwnProperty('username')) {
+    //         console.log('Usrename: ' + data.username);
+    //         this.setState({
+    //            userName: data.username
+    //         });
+    //     }
+    // }.bind(this));
+    console.log('in profile page user is: ' + LocalAuth.getAuthenticatedUser());
+    if(LocalAuth.getAuthenticatedUser() !== null) {
+      this.setState({
+        userName: LocalAuth.getAuthenticatedUser()
+      });
+    }
 
   }
 
