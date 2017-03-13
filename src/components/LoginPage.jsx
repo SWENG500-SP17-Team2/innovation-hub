@@ -60,8 +60,6 @@ class LoginPage extends React.Component {
         // success
 
         // Save the token and user
-        console.log('user is: ' + xhr.response.user.name);
-
         LocalAuth.authenticateUser(xhr.response.token, xhr.response.user.name);
 
         // change the component-container state

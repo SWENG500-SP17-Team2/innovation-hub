@@ -5,6 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import { store, actions } from '../stores/app';
 import { marginMedium } from '../styles';
+import LocalAuth from '../modules/LocalAuth';
+
 
 class InnovationList extends React.Component {
     constructor(props) {
@@ -24,14 +26,31 @@ class InnovationList extends React.Component {
     }
 
     componentWillMount() {
-      $.getJSON('/api/innovations').then(result => {
-        this.setState({
-        innovations: result
-        });
 
-      }, error =>{
-      console.log(error);
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', '/api/innovations');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // set the authorization HTTP header
+      xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          this.setState({
+             innovations: xhr.response.InnovationDocs
+          });
+        }
       });
+      xhr.send();
+
+
+      // $.getJSON('/api/innovations').then(result => {
+      //   this.setState({
+      //   innovations: result
+      // //   });
+      //
+      // }, error =>{
+      // console.log(error);
+      // });
     }
 
     render() {
@@ -39,9 +58,9 @@ class InnovationList extends React.Component {
               return (<div>
                     { this.state.innovations.map(function(item) {
                             return <Card style={marginMedium}>
-                                <CardTitle title={item.Name}></CardTitle>
+                                <CardTitle title={item.title}></CardTitle>
                                 <CardText>
-                                    {item.Description}
+                                    {item.description}
                                 </CardText>
                             </Card>
                         })

@@ -19,26 +19,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//var databaseName = 'innovationHub';
-//var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
+var databaseName = 'innovationHub';
+var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
 
-//var db;
+var db;
 
 
-// mongodb.MongoClient.connect(mongoURL, function (err, database) {
-//   if (err) {
-//     console.log(err);
-//     process.exit(1);
-//   }
-//
-//
-//   db = database;
-//   console.log("Database sucessfully connected");
-//
-//
-//   var server = app.listen(port)
-//   console.log('Server listening on port ' + chalk.green(port));
-// });
+mongodb.MongoClient.connect(mongoURL, function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+
+  db = database;
+  console.log("Database sucessfully connected");
+
+
+  //var server = app.listen(port)
+  //console.log('Server listening on port ' + chalk.green(port));
+});
 
 
 morgan.token('color_status', (req, res) => {
@@ -107,7 +107,7 @@ app.get("/api/innovations", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get innovations.");
     } else {
-      res.status(200).json(docs);
+      res.status(200).json({InnovationDocs: docs});
     }
   });
 });

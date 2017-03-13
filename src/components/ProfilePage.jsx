@@ -24,7 +24,6 @@ class ProfilePage extends React.Component {
     //         });
     //     }
     // }.bind(this));
-    console.log('in profile page user is: ' + LocalAuth.getAuthenticatedUser());
     if(LocalAuth.getAuthenticatedUser() !== null) {
       this.setState({
         userName: LocalAuth.getAuthenticatedUser()
