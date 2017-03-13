@@ -1,10 +1,13 @@
 import React from 'react';
-import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
+// { AppRegistry, View } from 'react-native';
+import { Card, CardTitle, CardText, CardActions, CardHeader, CardMedia } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
 import { store, actions } from '../stores/app';
 import { marginMedium } from '../styles';
+import { ideaCard } from '../styles';
+import { ideaCardList } from '../styles';
 
 class InnovationList extends React.Component {
     constructor(props) {
@@ -36,14 +39,35 @@ class InnovationList extends React.Component {
 
     render() {
 
-              return (<div>
+              return (<div style={ideaCardList}>
                     { this.state.innovations.map(function(item) {
-                            return <Card style={marginMedium}>
-                                <CardTitle title={item.Name}></CardTitle>
-                                <CardText>
-                                    {item.Description}
-                                </CardText>
-                            </Card>
+                            return  <div style={ideaCard}>
+
+                                        <Card>
+                                          <CardHeader
+                                            title={item.title}
+                                            subtitle=""
+                                            avatar="https://image.shutterstock.com/z/stock-vector-reach-idea-with-human-hand-145799489.jpg"
+                                          />
+                                          <CardMedia
+                                            overlay={<CardTitle title={item.title} subtitle="" />}
+                                          >
+                                            <img src={item.image} />
+                                          </CardMedia>
+                                          <CardTitle title={item.title} />
+                                          <CardText>
+                                            {item.description}
+                                          </CardText>
+                                          <CardActions>
+                                            <div style={{flex: 1, flexDirection: 'row'}}>
+                                              <div style={{flex: 1}}><img src="../assets/comment-icon.png"/>3 Comments</div>
+                                              <div style={{flex: 1}}><img src="../assets/thumb-up-icon.png"/>4 Likes</div>
+                                            </div>
+                                          </CardActions>
+
+                                        </Card>
+                                    </div>
+
                         })
                     }
         </div>);

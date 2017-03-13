@@ -27,7 +27,7 @@ const textCenter = {
 const topBar = {
     padding: '10px 15px',
     marginBottom: '50px',
-    height: '50',
+    height: '50px',
     backgroundColor: 'darkturquoise'
 };
 
@@ -42,6 +42,16 @@ const topBarRight = {
     marginRight: '20px'
 };
 
+const ideaCard = {
+    width: '66%',
+    marginBottom: '10px',
+    marginTop: '10px',
+};
+const ideaCardList = {
+    flex: 1,
+    flexDirection: 'row'
+};
+
 export {
     marginSmall,
     marginMedium,
@@ -51,5 +61,7 @@ export {
     topBar,
     topBarLeft,
     topBarRight,
-    formSubmit
+    formSubmit,
+    ideaCard,
+    ideaCardList
 };
