@@ -57,7 +57,7 @@ class LoginPage extends React.Component {
         // success
 
         // Save the token
-        LocalAuth.authenticateUser(xhr.response.token);
+        LocalAuth.authenticateUser(xhr.response.token, xhr.response.loginUser.admin);
 
         // change the component-container state
         this.setState({
@@ -67,10 +67,15 @@ class LoginPage extends React.Component {
         console.log('Welcome  ' +
               xhr.response.loginUser.name +
               ' \n ' + xhr.response.message +
+              ' \n admin ' + xhr.response.loginUser.admin +
               ' \ntoken: ' + xhr.response.token);
 
         // change the current URL to /
-        this.context.router.replace('/Dashboard');
+        if(xhr.response.loginUser.admin === 'true') {
+           this.context.router.replace('/Admin');
+        } else {
+           this.context.router.replace('/Dashboard');
+        }
         //this.context.router.replace('/Admin');
       } else {
         // failure

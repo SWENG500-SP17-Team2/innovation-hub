@@ -85,8 +85,6 @@ router.post('/signup', (req, res, next) => {
     });
   }
 
-  console.log('ENTERING signup post');
-
   return passport.authenticate('local-signup', (err) => {
     if (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -113,7 +111,6 @@ router.post('/signup', (req, res, next) => {
     });
   })(req, res, next);
 
-  console.log('EXITING signup post');
 });
 
 router.post('/login', (req, res, next) => {
@@ -126,8 +123,6 @@ router.post('/login', (req, res, next) => {
       errors: validationResult.errors
     });
   }
-
-  console.log('ENTERING login post');
 
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
@@ -152,8 +147,6 @@ router.post('/login', (req, res, next) => {
       loginUser: userData
     });
   })(req, res, next);
-
-  console.log('EXITING login post');
 
 });
 

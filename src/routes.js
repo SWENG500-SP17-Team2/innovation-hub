@@ -16,19 +16,23 @@ const routes = {
      {path: '/',
         getComponent: (location, callback) => {
            if(LocalAuth.isUserAuthenticated()) {
-              //callback(null, InnovationList);
-              callback(null, DashboardPage);
+              if(LocalAuth.isAdmin()) {
+                callback(null, Admin);
+              }
+              else {
+                callback(null, InnovationList);
+                //callback(null, DashboardPage);
+              }
            } else {
               callback(null, HomePage);
-              //callback(null, Admin);
            }
         }
      },
      {path: '/login', component: LoginPage},
      {path: '/signup', component: SignUpPage},
      {path: '/NewPost', component: PostIdea},
-     //{path: '/Dashboard', component: InnovationList},
-     {path: '/Dashboard', component: DashboardPage},
+     {path: '/Dashboard', component: InnovationList},
+     //{path: '/Dashboard', component: DashboardPage},
      {path: '/Admin', component: Admin},
      {path: '/logout',
         onEnter: (nextState, replace) => {

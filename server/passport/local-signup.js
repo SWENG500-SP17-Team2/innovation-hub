@@ -14,14 +14,14 @@ module.exports = new PassportLocalStrategy({
   const userData = {
     email: email.trim(),
     password: password.trim(),
-    name: req.body.name.trim()
+    name: req.body.name.trim(),
+    admin: req.body.admin.trim(),
+    banned: req.body.banned.trim()
   };
-  console.log('ENTERING local-signup');
   const newUser = new User(userData);
   newUser.save((err) => {
     if (err) { return done(err); }
 
     return done(null);
   });
-  console.log('EXITING local-signup');
 });
