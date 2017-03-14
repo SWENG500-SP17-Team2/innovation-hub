@@ -36,6 +36,7 @@ class PostIdea extends React.Component {
 
        // Make a redirect
        this.context.router.replace('/Dashboard');
+       //this.context.router.replace('/Admin');
     }
 
     render() {

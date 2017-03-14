@@ -33,16 +33,19 @@ class SignUpPage extends React.Component {
     // prevent default action
     event.preventDefault();
 
-    //alert('SignUp information\nname: ' +
-    //      this.state.user.name +
-    //      ' \nemail: ' + this.state.user.email +
-    //      ' \npassword: ' + this.state.user.password );
-
     // Create a string for an HTTP body message
     const name = encodeURIComponent(this.state.user.name);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
-    const formData = `name=${name}&email=${email}&password=${password}`;
+    var adminFT = false;
+    if(this.state.user.name     == "Admin123" &&
+       this.state.user.password == "Admin123")
+    {
+       var adminTF = true;
+    }
+    const admin = encodeURIComponent(adminTF);
+    const banned = encodeURIComponent('false');
+    const formData = `name=${name}&email=${email}&password=${password}&admin=${admin}&banned=${banned}`;
 
     // Create an AJAX request
     const xhr = new XMLHttpRequest();
@@ -60,12 +63,7 @@ class SignUpPage extends React.Component {
 
           // Make a redirect
           this.context.router.replace('/login');
-/*
-          alert('SignUp information\nname: ' +
-                this.state.user.name +
-                ' \nemail: ' + this.state.user.email +
-                ' \npassword: ' + this.state.user.password);
-*/
+
        } else {
           // Failure
 
@@ -86,7 +84,6 @@ class SignUpPage extends React.Component {
 
   // Display the object
   render() {
-    //return (<h1> Hello from SignUp Page</h1>);
 
     return  (
       <SignUpForm
