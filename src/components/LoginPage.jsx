@@ -47,9 +47,6 @@ class LoginPage extends React.Component {
     const password = encodeURIComponent(this.state.user.password);
     const formData = `email=${email}&password=${password}`;
 
-    alert('Login information\nemail: ' +
-          this.state.user.email + ' \npassword: ' + this.state.user.password );
-
     // create an AJAX request
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/login');
@@ -59,21 +56,27 @@ class LoginPage extends React.Component {
       if (xhr.status === 200) {
         // success
 
-        // Save the token and user
-        LocalAuth.authenticateUser(xhr.response.token, xhr.response.user.name);
+        // Save the token, user and admin priviledge
+        LocalAuth.authenticateUser(xhr.response.token, xhr.response.user.name, xhr.response.loginUser.admin);
 
         // change the component-container state
         this.setState({
           errors: {}
         });
-/*
-        alert('Login information\nemail: ' +
-              this.state.user.email +
-              ' \npassword: ' + this.state.user.password +
+
+        console.log('Welcome  ' +
+              xhr.response.loginUser.name +
+              ' \n ' + xhr.response.message +
+              ' \n admin ' + xhr.response.loginUser.admin +
               ' \ntoken: ' + xhr.response.token);
-*/
+
         // change the current URL to /
-        this.context.router.replace('/Dashboard');
+        if(xhr.response.loginUser.admin === 'true') {
+           this.context.router.replace('/Admin');
+        } else {
+           this.context.router.replace('/Dashboard');
+        }
+        //this.context.router.replace('/Admin');
       } else {
         // failure
 
@@ -92,7 +95,6 @@ class LoginPage extends React.Component {
 
   // Display the object
   render() {
-    //return (<h1> Hello from Login Page</h1>);
 
     return  (
       <LoginForm

@@ -1,8 +1,9 @@
 class LocalAuth {
 
-   static authenticateUser(token, user) {
+   static authenticateUser(token, user, admin) {
        localStorage.setItem('token', token);
        localStorage.setItem('authenticatedUser', user);
+       localStorage.setItem('admin', admin);
    }
 
    static isUserAuthenticated() {
@@ -12,6 +13,7 @@ class LocalAuth {
    static deauthenticateUser() {
      localStorage.removeItem('token');
      localStorage.removeItem('authenticatedUser');
+     localStorage.setItem('admin', false);
    }
 
    static getToken() {
@@ -22,6 +24,9 @@ class LocalAuth {
      return localStorage.getItem('authenticatedUser');
    }
 
+   static isAdmin() {
+     return localStorage.getItem('admin') !== false;
+   }
 }
 
 export default LocalAuth;

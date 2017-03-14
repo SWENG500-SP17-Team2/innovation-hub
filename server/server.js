@@ -40,6 +40,9 @@ mongodb.MongoClient.connect(mongoURL, function (err, database) {
   //console.log('Server listening on port ' + chalk.green(port));
 });
 
+// Tell the app to parse HTTP body messages
+app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 morgan.token('color_status', (req, res) => {
     if (res.statusCode < 300) {
@@ -69,22 +72,23 @@ app.use(passport.initialize());
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
+const localQueryStrategy = require('./passport/local-query');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('local-query', localQueryStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
-
-// Tell the app to parse HTTP body messages
-app.use(bodyParser.urlencoded({extended: false}));
-
+//app.use('/query', authCheckMiddleware);
 
 // routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+const queryRoutes = require('./routes/query');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/query', queryRoutes);
 
 app.listen(port)
 console.log('Server listening on port ' + chalk.green(port));

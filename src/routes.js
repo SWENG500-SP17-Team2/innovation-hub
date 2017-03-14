@@ -6,6 +6,7 @@ import PostIdea from './components/PostIdea';
 import ProfilePage from './components/ProfilePage';
 import InnovationList from './components/InnovationList';
 import LocalAuth from './modules/LocalAuth';
+import Admin from './components/Admin';
 
 const routes = {
    // Base component (wrapper for the whole application)
@@ -15,7 +16,13 @@ const routes = {
      {path: '/',
         getComponent: (location, callback) => {
            if(LocalAuth.isUserAuthenticated()) {
-              callback(null, InnovationList);
+              if(LocalAuth.isAdmin()) {
+                callback(null, Admin);
+              }
+              else {
+                callback(null, InnovationList);
+                //callback(null, DashboardPage);
+              }
            } else {
               callback(null, HomePage);
            }
@@ -26,6 +33,7 @@ const routes = {
      {path: '/NewPost', component: PostIdea},
      {path: '/Dashboard', component: InnovationList},
      {path: '/ProfilePage', component: ProfilePage},
+     {path: '/Admin', component: Admin},
      {path: '/logout',
         onEnter: (nextState, replace) => {
            LocalAuth.deauthenticateUser();
