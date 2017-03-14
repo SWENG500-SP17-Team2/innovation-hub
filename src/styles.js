@@ -51,6 +51,10 @@ const topBarRight = {
     marginRight: '20px'
 };
 
+const homepageBackground = {
+  backgroundColor: '#E0EFF1'
+}
+
 export {
     marginSmall,
     marginMedium,
@@ -62,5 +66,6 @@ export {
     topBarRight,
     formSubmit,
     ProfileStyle,
-    FaceIconStyle
+    FaceIconStyle,
+    homepageBackground
 };
