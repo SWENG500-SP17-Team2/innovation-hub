@@ -64,11 +64,11 @@ class LoginPage extends React.Component {
           errors: {}
         });
 
-        console.log('Welcome  ' +
-              xhr.response.loginUser.name +
-              ' \n ' + xhr.response.message +
-              ' \n admin ' + xhr.response.loginUser.admin +
-              ' \ntoken: ' + xhr.response.token);
+        //console.log('Welcome  ' +
+        //      xhr.response.loginUser.name +
+        //      ' \n ' + xhr.response.message +
+        //      ' \n admin ' + xhr.response.loginUser.admin +
+        //      ' \ntoken: ' + xhr.response.token);
 
         // change the current URL to /
         if(xhr.response.loginUser.admin === 'true') {
