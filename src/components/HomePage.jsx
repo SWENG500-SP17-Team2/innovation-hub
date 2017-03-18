@@ -1,8 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CardActions } from 'material-ui/Card';
-import { marginMedium, marginXLarge, textCenter, homepageTitle} from '../styles';
+import { Card, CardTitle, CardMedia, CardActions } from 'material-ui/Card';
+import { marginMedium, marginXLarge, textCenter, homepageTitle, homepageBackground, homepageSubtitle} from '../styles';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
+import ImageGallery from 'react-image-gallery';
+
 
 class HomePage extends React.Component {
 
@@ -33,15 +35,20 @@ class HomePage extends React.Component {
 
     return (
     <div>
-      <Card className="container"  style={marginMedium}>
-          <CardTitle title="Innovation Hub"
-                   subtitle="A Place to Share Ideas"
-                 style={textCenter}/>
-      <ImageGallery
-        items={images}
-        slideInterval={2000}
-        showPlayButton = {false}
-        showFullscreenButton = {false}/>
+      <Card className="container"  style={homepageBackground}>
+          <CardTitle title="Innovation Hub" titleStyle={homepageTitle}
+                   subtitle="A Place to Share Ideas" subtitleStyle={homepageSubtitle}
+                 />
+       <CardMedia>
+        <ImageGallery
+          items={images}
+          slideInterval={5000}
+          autoPlay={true}
+          showPlayButton = {false}
+          showFullscreenButton = {false}
+          disableArrowKeys = {false}
+          showBullets = {true}/>
+        </CardMedia>
        </Card>
     </div>
     );

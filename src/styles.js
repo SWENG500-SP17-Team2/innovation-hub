@@ -36,15 +36,20 @@ const topBar = {
 };
 
 const homepageTitle = {
-    fontsize: '45px',
-    lineheight: 2,
-    fontweight: bold,
-    margintop: '50px'
+    fontSize: '45px',
+    lineHeight: 2,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: '16px'
 
 };
 
 const homepageSubtitle = {
-
+    fontSize: '30px',
+    //lineheight: 2,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: '16px'
 
 };
 
@@ -69,7 +74,10 @@ const topBarRight = {
 };
 
 const homepageBackground = {
-  backgroundColor: '#E0EFF1'
+  backgroundColor: '#009688',
+  maxWidth: '650px',
+  margin: 'auto',
+  justifyContent: 'center'
 }
 
 export {
@@ -86,5 +94,6 @@ export {
     ProfileStyle,
     FaceIconStyle,
     homepageTitle,
+    homepageSubtitle,
     homepageBackground
 };
