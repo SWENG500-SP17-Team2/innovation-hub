@@ -37,6 +37,11 @@ const ProfileView = ({userName}) => (
             <h2>Here goes some graphs</h2>
           </div>
         </Tab>
+        <Tab label="Settings" >
+          <div>
+            <h2>Some settings</h2>
+          </div>
+        </Tab>
       </Tabs>
     </Card>
    </Paper>

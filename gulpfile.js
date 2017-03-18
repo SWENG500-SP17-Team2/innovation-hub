@@ -14,6 +14,8 @@ const tapMin = require('tap-min');
 const babel = require('gulp-babel');
 const mkdirs = require('mkdirs');
 const spawn = require('child_process').spawn;
+const importCss = require('gulp-import-css');
+
 
 var commandBuilder = function(command) {
     "use strict";
@@ -111,7 +113,7 @@ gulp.task('serve', () => {
     });
 });
 
-gulp.task('build', ['copyfiles', 'buildjs']);
+gulp.task('build', ['copyfiles', 'buildjs', 'importcss']);
 
 gulp.task('watch', ['build'], () => {
     gulp.watch(['src/**/*.jsx', 'src/**/*.js'], ['buildjs']);
@@ -136,6 +138,12 @@ gulp.task('buildjs', () => {
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('importcss', function () {
+  gulp.src('src/app.css')
+    .pipe(importCss())
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('test', ['testbuild'], () => {

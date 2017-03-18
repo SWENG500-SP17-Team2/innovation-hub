@@ -10,6 +10,10 @@ const marginLarge = {
     margin: '24px'
 };
 
+const marginXLarge = {
+    margin: '48px'
+}
+
 const formSubmit = {
     width: '97%',
     height: '100px',
@@ -29,6 +33,19 @@ const topBar = {
     marginBottom: '50px',
     height: '50',
     backgroundColor: 'darkturquoise'
+};
+
+const homepageTitle = {
+    fontsize: '45px',
+    lineheight: 2,
+    fontweight: bold,
+    margintop: '50px'
+
+};
+
+const homepageSubtitle = {
+
+
 };
 
 const ProfileStyle = {
@@ -59,6 +76,7 @@ export {
     marginSmall,
     marginMedium,
     marginLarge,
+    marginXLarge,
     style,
     textCenter,
     topBar,
@@ -67,5 +85,6 @@ export {
     formSubmit,
     ProfileStyle,
     FaceIconStyle,
+    homepageTitle,
     homepageBackground
 };
