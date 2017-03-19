@@ -31,6 +31,11 @@ const topBar = {
     backgroundColor: 'darkturquoise'
 };
 
+const bottomBar = {
+    marginBottom: '50px',
+    fontSize: '12'
+};
+
 const ProfileStyle = {
   margin: 20,
 };
@@ -62,6 +67,7 @@ export {
     style,
     textCenter,
     topBar,
+    bottomBar,
     topBarLeft,
     topBarRight,
     formSubmit,
