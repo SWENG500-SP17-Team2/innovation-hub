@@ -43,7 +43,7 @@ class SignUpPage extends React.Component {
        this.state.user.email    == "Admin123@bvw.com" )
     {
        adminTF = true;
-    } 
+    }
 
     const admin = encodeURIComponent(adminTF);
     const banned = encodeURIComponent('false');
