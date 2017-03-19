@@ -1,12 +1,24 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
-import { marginMedium, textCenter } from '../styles';
+import { marginSmall, marginMedium, textCenter } from '../styles';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import LocalAuth from '../modules/LocalAuth';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ActionLock from 'material-ui/svg-icons/action/lock';
+import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+import CommunicationMessage from 'material-ui/svg-icons/communication/message';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
+
+/**
+ * Main Admin class
+*/
 class Admin extends React.Component {
 
     constructor(props) {
@@ -18,12 +30,18 @@ class Admin extends React.Component {
           //  userName: 'William Elliott',
           //  email : 'welliot0@aol.com'
           //},],
-          updateRequired: false
+          selectedEmail:''
           };
 
-          //this.handleSelect = this.handleSelect.bind(this);
+          this.handleLock = this.handleLock.bind(this);
+          this.handleUnLock = this.handleUnLock.bind(this);
+          this.handleDelete = this.handleDelete.bind(this);
+          this.handleRowHover = this.handleRowHover.bind(this);
     }
 
+/**
+  * Routine to querying registered users
+*/
     componentDidMount() {
        //console.log ('componentDidMount is invoke');
 
@@ -57,8 +75,6 @@ class Admin extends React.Component {
                       userStr.charAt(index+3) === 'i' &&
                       userStr.charAt(index+4) === 'l' )
                    {
-//                     console.log('\n ======= Detecting email pattern ====== \n');
-//                     console.log('\n ====================================== \n');
                      for (var eId = index+8; eId < userStr.length; eId++) {
                         if(userStr[eId]   === '"' &&
                            userStr[eId+1] === ',' &&
@@ -69,8 +85,6 @@ class Admin extends React.Component {
                           userEmail += userStr.charAt(eId);
                         }
                      }
-//                     console.log('\nuser email is: ' + userEmail);
-//                     console.log('\n ====================================== \n');
                    }
                    // Extract user's name
                    if(userStr.charAt(index)   === '"' &&
@@ -81,8 +95,6 @@ class Admin extends React.Component {
                       userStr.charAt(index+5) === 'm' &&
                       userStr.charAt(index+6) === 'e')
                    {
-//                     console.log('\n ======= Detecting name pattern ====== \n');
-//                     console.log('\n ====================================== \n');
                      for (var nId = index+10; nId < userStr.length; nId++) {
                         if(userStr[nId]   === '"' &&
                            userStr[nId+1] === ',' &&
@@ -93,8 +105,6 @@ class Admin extends React.Component {
                           userName += userStr.charAt(nId);
                         }
                      }
-//                     console.log('\nuserName is: ' + userName);
-//                     console.log('\n ====================================== \n');
 
                    }
 
@@ -108,8 +118,6 @@ class Admin extends React.Component {
                      userStr.charAt(index+6) === 'i' &&
                      userStr.charAt(index+7) === 'n')
                   {
-//                    console.log('\n ======= Detecting admin pattern ====== \n');
-//                    console.log('\n ====================================== \n');
                     for (var pId = index+11; pId < userStr.length; pId++) {
                        if(userStr[pId]   === '"' &&
                           userStr[pId+1] === ',' &&
@@ -120,8 +128,6 @@ class Admin extends React.Component {
                          userPrivilege += userStr.charAt(pId);
                        }
                     }
-//                    console.log('\nadmin is: ' + userPrivilege);
-//                    console.log('\n ====================================== \n');
                   }
 
                   // Extract user's status
@@ -135,8 +141,6 @@ class Admin extends React.Component {
                      userStr.charAt(index+7) === 'e' &&
                      userStr.charAt(index+8) === 'd')
                     {
-//                      console.log('\n ======= Detecting banned pattern ====== \n');
-//                      console.log('\n ====================================== \n');
                       for (var sId = index+12; sId < userStr.length; sId++) {
                          if(userStr[sId]   === '"' &&
                             userStr[sId+1] === ',' &&
@@ -147,21 +151,16 @@ class Admin extends React.Component {
                            userStatus += userStr.charAt(sId);
                          }
                       }
-//                      console.log('\nbanned is: ' + userPrivilege);
-//                      console.log('\n ====================================== \n');
-//                      console.log('\nPUSHING userName: ' + userName +
-//                                  '\n        userEmail: ' + userEmail +
-//                                  '\n        userStatus: ' + userStatus +'\n');
 
                       if(userPrivilege !== 'true') {
                          if(userStatus == 'false') {
-                            userStatus = 'Active';
+                            var status = 'Active';
                          } else {
-                            userStatus = 'Locked';
+                            var status = 'Locked';
                          }
 
                          // Push this user object into an array
-                         rowArray.push({userName: userName, email: userEmail, status:userStatus});
+                         rowArray.push({userName: userName, email: userEmail, status:status});
 
                          this.setState({
                            tableData: rowArray
@@ -181,7 +180,101 @@ class Admin extends React.Component {
           xhr.send(formData);
     }
 
+/**
+ * Routine to handle lock an user account
+*/
+    handleLock (event) {
+      event.preventDefault();
+
+      alert("handleLock routine is called. selectedEmail : " +this.state.selectedEmail);
+
+      const email = encodeURIComponent(this.state.selectedEmail);
+      const password = encodeURIComponent('true');
+      const formData = `email=${email}&password=${password}`;
+      // create an AJAX request
+      const xhr = new XMLHttpRequest();
+      xhr.open('post', '/update/updateLockAttr');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          alert("Successuful locking userEmail: " +this.state.selectedEmail);
+        } else {
+          alert("Failure to lock userEmail: " +this.state.selectedEmail);
+        }
+      });
+
+      xhr.send(formData);
+
+    }
+
+/**
+ * Routine to handle unlock an user account
+*/
+    handleUnLock (event) {
+      event.preventDefault();
+
+      alert("handleUnLock routine is called. selectedEmail : " +this.state.selectedEmail);
+
+      const email = encodeURIComponent(this.state.selectedEmail);
+      const password = encodeURIComponent('false');
+      const formData = `email=${email}&password=${password}`;
+      // create an AJAX request
+      const xhr = new XMLHttpRequest();
+      xhr.open('post', '/update/updateLockAttr');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          alert("Successuful Unlocking userEmail: " +this.state.selectedEmail);
+        } else {
+          alert("Failure to Unlock userEmail: " +this.state.selectedEmail);
+        }
+      });
+
+      xhr.send(formData);
+
+    }
+
+/**
+ * Routine to delete an user account
+*/
+    handleDelete (event) {
+      event.preventDefault();
+
+      alert("handleDelete routine is called. selectedEmail : " +this.state.selectedEmail);
+      const email = encodeURIComponent(this.state.selectedEmail);
+      const password = encodeURIComponent(this.state.selectedEmail);
+      const formData = `email=${email}&password=${password}`;
+      // create an AJAX request
+      const xhr = new XMLHttpRequest();
+      xhr.open('post', '/update/deleteAccount');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          alert("Successuful deleting userEmail: " +this.state.selectedEmail);
+        } else {
+          alert("Failure to delete userEmail: " +this.state.selectedEmail);
+        }
+      });
+
+      xhr.send(formData);
+
+    }
+
+/**
+ * Routine to detect current rowNumber
+*/
+    handleRowHover (rowNumber) {
+      this.state.selectedEmail = this.state.tableData[rowNumber].email;
+    }
+
+/**
+ * Render function of Admin class
+*/
     render() {
+
       return (
         <div>
           <Card className="container"  style={marginMedium}>
@@ -198,20 +291,35 @@ class Admin extends React.Component {
 
                <TabPanel>
                  <h3>Displaying list of users</h3>
-                 <Table>
+                 <Table selectable={true} onRowHover = {this.handleRowHover}>
                     <TableHeader>
                        <TableRow>
                          <TableHeaderColumn>Name</TableHeaderColumn>
                          <TableHeaderColumn>e-mail</TableHeaderColumn>
                          <TableHeaderColumn>Status</TableHeaderColumn>
+                         <TableHeaderColumn>Actions</TableHeaderColumn>
                        </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody showRowHover={true}>
                        {this.state.tableData.map( (row, index) => (
-                         <TableRow key={index}>
+                         <TableRow key={index} selected={row.selected} >
                            <TableRowColumn>{row.userName}</TableRowColumn>
                            <TableRowColumn>{row.email}</TableRowColumn>
                            <TableRowColumn>{row.status}</TableRowColumn>
+                           <TableRowColumn>
+                             <IconButton>
+                               <CommunicationMessage />
+                             </IconButton>
+                             <IconButton disabled={(row.status=='Locked')} onTouchTap={this.handleLock}>
+                               <ActionLock />
+                             </IconButton>
+                             <IconButton disabled={(row.status=='Active')} onTouchTap={this.handleUnLock}>
+                               <ActionLockOpen />
+                             </IconButton>
+                             <IconButton disabled={false} onTouchTap={this.handleDelete}>
+                               <ActionDelete />
+                             </IconButton>
+                           </TableRowColumn>
                          </TableRow>
                        ))}
                     </TableBody>
@@ -230,7 +338,6 @@ class Admin extends React.Component {
           </Card>
 
         </div>
-
       );
     }
 }
