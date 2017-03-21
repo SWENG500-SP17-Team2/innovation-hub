@@ -78,13 +78,21 @@ const homepageBackground = {
   maxWidth: '650px',
   margin: 'auto',
   justifyContent: 'center'
+};
+
+const changePasswordCardStyle = {
+  textAlign: 'center'
 }
 
+const subTabStyle = {
+  backgroundColor:"#90ee90"
+};
 export {
     marginSmall,
     marginMedium,
     marginLarge,
     marginXLarge,
+    subTabStyle,
     style,
     textCenter,
     topBar,
@@ -95,5 +103,6 @@ export {
     FaceIconStyle,
     homepageTitle,
     homepageSubtitle,
-    homepageBackground
+    homepageBackground,
+    changePasswordCardStyle
 };
