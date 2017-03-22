@@ -8,6 +8,8 @@ import { store, actions } from '../stores/app';
 import { marginMedium } from '../styles';
 import { ideaCard } from '../styles';
 import { ideaCardList } from '../styles';
+import LocalAuth from '../modules/LocalAuth';
+
 
 class InnovationList extends React.Component {
     constructor(props) {
@@ -27,50 +29,62 @@ class InnovationList extends React.Component {
     }
 
     componentWillMount() {
-      $.getJSON('/api/innovations').then(result => {
-        this.setState({
-        innovations: result
-        });
 
-      }, error =>{
-      console.log(error);
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', '/api/innovations');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // set the authorization HTTP header
+      xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          this.setState({
+             innovations: xhr.response.InnovationDocs
+          });
+        }
       });
+      xhr.send();
+
+
+      // $.getJSON('/api/innovations').then(result => {
+      //   this.setState({
+      //   innovations: result
+      // //   });
+      //
+      // }, error =>{
+      // console.log(error);
+      // });
     }
 
     render() {
 
               return (<div style={ideaCardList}>
-                    { this.state.innovations.map(function(item) {
+                        { this.state.innovations.map(function(item) {
                             return  <div style={ideaCard}>
-
                                         <Card>
                                           <CardHeader
-                                            title={item.title}
-                                            subtitle=""
+                                            title={item.user}
                                             avatar="https://image.shutterstock.com/z/stock-vector-reach-idea-with-human-hand-145799489.jpg"
                                           />
-                                          <CardMedia
-                                            overlay={<CardTitle title={item.title} subtitle="" />}
-                                          >
+                                          <CardMedia overlay={<CardTitle title={item.title} subtitle="" />}>
                                             <img src={item.image} />
                                           </CardMedia>
-                                          <CardTitle title={item.title} />
                                           <CardText>
                                             {item.description}
                                           </CardText>
                                           <CardActions>
-                                            <div style={{flex: 1, flexDirection: 'row'}}>
-                                              <div style={{flex: 1}}><img src="../assets/comment-icon.png"/>3 Comments</div>
-                                              <div style={{flex: 1}}><img src="../assets/thumb-up-icon.png"/>4 Likes</div>
+                                            <div style={{ display:'flex', alignItems:'center', width:'66%'}}>
+                                              <div style={{margin:'10px'}} ><img src="../assets/comment-icon.png"/>3 Comments</div>
+                                              <div ><img src="../assets/thumb-up-icon.png"/>4 Likes</div>
                                             </div>
                                           </CardActions>
 
                                         </Card>
                                     </div>
 
-                        })
-                    }
-        </div>);
+                            })
+                        }
+                        </div>);
     }
 }
 

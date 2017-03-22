@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import TextField from 'material-ui/TextField';
 import {Card, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {textCenter } from '../styles';
+import { marginMedium, textCenter } from '../styles';
 
 
 const SignUpForm = ({
@@ -12,13 +12,13 @@ const SignUpForm = ({
     errors,
     user
 }) => (
-    <Card className="container">
+    <Card className="container" style={marginMedium}>
        <form action="/" onSubmit={onSubmit}>
-          <h2 className="card-heading">Sign Up</h2>
+          <h2 className="card-heading" style={textCenter}>Sign Up</h2>
 
           {errors.summary && <p className="error-message">{errors.summary}</p>}
 
-          <div className="field-line">
+          <div className="field-line" style={textCenter}>
              <TextField
                 floatingLabelText="Name"
                 name="name"
@@ -28,7 +28,7 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="field-line">
+          <div className="field-line" style={textCenter}>
              <TextField
                 floatingLabelText="Email"
                 name="email"
@@ -38,7 +38,7 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="field-line">
+          <div className="field-line" style={textCenter}>
              <TextField
                 floatingLabelText="Password"
                 name="password"
@@ -49,11 +49,11 @@ const SignUpForm = ({
                />
           </div>
 
-          <div className="button-line">
+          <div className="button-line" style={textCenter}>
              <RaisedButton type="submit" label="Create New Account" primary/>
           </div>
 
-          <CardText>Already have an account?
+          <CardText style={textCenter}>Already have an account?
             <Link to={'/login'}> Log in</Link>
           </CardText>
        </form>

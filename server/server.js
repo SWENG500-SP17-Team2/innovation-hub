@@ -19,27 +19,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//var databaseName = 'innovationHub';
-//var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
+var databaseName = 'innovationHub';
+var mongoURL = 'mongodb://localhost:27017' + '/' + databaseName;
 
-//var db;
+var db;
 
 
-// mongodb.MongoClient.connect(mongoURL, function (err, database) {
-//   if (err) {
-//     console.log(err);
-//     process.exit(1);
-//   }
-//
-//
-//   db = database;
-//   console.log("Database sucessfully connected");
-//
-//
-//   var server = app.listen(port)
-//   console.log('Server listening on port ' + chalk.green(port));
-// });
+mongodb.MongoClient.connect(mongoURL, function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
 
+
+  db = database;
+  console.log("Database sucessfully connected");
+
+
+  //var server = app.listen(port)
+  //console.log('Server listening on port ' + chalk.green(port));
+});
+
+// Tell the app to parse HTTP body messages
+app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 morgan.token('color_status', (req, res) => {
     if (res.statusCode < 300) {
@@ -69,22 +72,23 @@ app.use(passport.initialize());
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
+const localQueryStrategy = require('./passport/local-query');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('local-query', localQueryStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
-
-// Tell the app to parse HTTP body messages
-app.use(bodyParser.urlencoded({extended: false}));
-
+//app.use('/query', authCheckMiddleware);
 
 // routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+const queryRoutes = require('./routes/query');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/query', queryRoutes);
 
 app.listen(port)
 console.log('Server listening on port ' + chalk.green(port));
@@ -107,7 +111,7 @@ app.get("/api/innovations", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get innovations.");
     } else {
-      res.status(200).json(docs);
+      res.status(200).json({InnovationDocs: docs});
     }
   });
 });
@@ -161,7 +165,17 @@ app.delete("/api/innovations/:id", function(req, res) {
 ////////////
 
 
-
+app.get('/user_data', function(req, res) {
+            //console.log(req.user.name);
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.status(200).json({username: "undefined user"});
+            } else {
+                res.status(200).json({
+                    username: req.user
+                });
+            }
+});
 
 app.post("/api/comments", function(req, res) {
   var newComment = req.body;

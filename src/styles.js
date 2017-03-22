@@ -31,6 +31,15 @@ const topBar = {
     backgroundColor: 'darkturquoise'
 };
 
+const ProfileStyle = {
+  margin: 20,
+};
+
+const FaceIconStyle = {
+  height: 20,
+  width: 20,
+};
+
 const topBarLeft = {
     fontSize: '1.5em',
     float: 'left',
@@ -46,11 +55,16 @@ const ideaCard = {
     width: '66%',
     marginBottom: '10px',
     marginTop: '10px',
+
 };
 const ideaCardList = {
-    flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'column',
+    alignItems: 'center',
+    display: 'flex'
 };
+const homepageBackground = {
+  backgroundColor: '#E0EFF1'
+}
 
 export {
     marginSmall,
@@ -62,6 +76,10 @@ export {
     topBarLeft,
     topBarRight,
     formSubmit,
+
     ideaCard,
-    ideaCardList
+    ideaCardList,
+    ProfileStyle,
+    FaceIconStyle,
+    homepageBackground
 };
