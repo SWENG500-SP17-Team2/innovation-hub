@@ -63,7 +63,12 @@ const ideaCardList = {
     display: 'flex'
 };
 const homepageBackground = {
-  backgroundColor: '#E0EFF1'
+    backgroundColor: '#E0EFF1'
+}
+
+const ideaCardActionBar = {
+    paddingRight:'40px',
+    paddingLeft:'40px'
 }
 
 export {
@@ -76,7 +81,7 @@ export {
     topBarLeft,
     topBarRight,
     formSubmit,
-
+    ideaCardActionBar,
     ideaCard,
     ideaCardList,
     ProfileStyle,

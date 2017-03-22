@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { store, actions } from '../stores/app';
 import { marginMedium } from '../styles';
 import { ideaCard } from '../styles';
-import { ideaCardList } from '../styles';
+import { ideaCardList, ideaCardActionBar } from '../styles';
 import LocalAuth from '../modules/LocalAuth';
 
 
@@ -45,15 +45,6 @@ class InnovationList extends React.Component {
       });
       xhr.send();
 
-
-      // $.getJSON('/api/innovations').then(result => {
-      //   this.setState({
-      //   innovations: result
-      // //   });
-      //
-      // }, error =>{
-      // console.log(error);
-      // });
     }
 
     render() {
@@ -64,6 +55,7 @@ class InnovationList extends React.Component {
                                         <Card>
                                           <CardHeader
                                             title={item.user}
+                                            subtitle="bcbrennecke@gmail.com"
                                             avatar="https://image.shutterstock.com/z/stock-vector-reach-idea-with-human-hand-145799489.jpg"
                                           />
                                           <CardMedia overlay={<CardTitle title={item.title} subtitle="" />}>
@@ -74,14 +66,15 @@ class InnovationList extends React.Component {
                                           </CardText>
                                           <CardActions>
                                             <div style={{ display:'flex', alignItems:'center', width:'66%'}}>
-                                              <div style={{margin:'10px'}} ><img src="../assets/comment-icon.png"/>3 Comments</div>
-                                              <div ><img src="../assets/thumb-up-icon.png"/>4 Likes</div>
+                                              <div style={ideaCardActionBar} >
+                                              <img style={{paddingRight:'10px'}} src="../assets/comment-icon.png"/>3 Comments</div>
+                                              <div >
+                                              <img style={{paddingRight:'10px'}} src="../assets/thumb-up-icon.png"/>4 Likes</div>
                                             </div>
                                           </CardActions>
 
                                         </Card>
                                     </div>
-
                             })
                         }
                         </div>);
