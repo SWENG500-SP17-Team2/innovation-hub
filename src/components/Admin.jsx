@@ -186,7 +186,7 @@ class Admin extends React.Component {
     handleLock (event) {
       event.preventDefault();
 
-      alert("handleLock routine is called. selectedEmail : " +this.state.selectedEmail);
+      //alert("handleLock routine is called. selectedEmail : " +this.state.selectedEmail);
 
       const email = encodeURIComponent(this.state.selectedEmail);
       const password = encodeURIComponent('true');
@@ -214,7 +214,7 @@ class Admin extends React.Component {
     handleUnLock (event) {
       event.preventDefault();
 
-      alert("handleUnLock routine is called. selectedEmail : " +this.state.selectedEmail);
+      //alert("handleUnLock routine is called. selectedEmail : " +this.state.selectedEmail);
 
       const email = encodeURIComponent(this.state.selectedEmail);
       const password = encodeURIComponent('false');
@@ -242,7 +242,7 @@ class Admin extends React.Component {
     handleDelete (event) {
       event.preventDefault();
 
-      alert("handleDelete routine is called. selectedEmail : " +this.state.selectedEmail);
+      //alert("handleDelete routine is called. selectedEmail : " +this.state.selectedEmail);
       const email = encodeURIComponent(this.state.selectedEmail);
       const password = encodeURIComponent(this.state.selectedEmail);
       const formData = `email=${email}&password=${password}`;
