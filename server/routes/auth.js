@@ -1,6 +1,8 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
+const User = require('mongoose').model('User');
+const config = require('../config');
 
 const router = new express.Router();
 
@@ -181,21 +183,25 @@ router.post('/changePassword', (req, res, next) => {
     });
   }
 
-
-
-    var user = req.user;
-    user.password = req.password;
-    console.log('this is current user' + user.name);
-    console.log('this is new password' + user.password);
-    user.save((err) => {
-      if (err) { return done(err); }
-
-      return done(null);
-    });
-
-    return res.status(200).json({
-      success: true,
-      message: 'You have successfully connected to changepassword.'
+  //returnUser.findOne({ email: userData.email }, (err, user) => {
+  User.find({}, (err, user) => {
+    //var user = req.user;
+    //user.password = req.password;
+    const data = {
+      name: user
+    };
+    console.log('this is current user' + data.name);
+    //console.log('this is current password' + user.password);
+    // user.save((err) => {
+    //   if (err) { return done(err); }
+    //
+    //   return done(null);
+    // });
+    //
+    // return res.status(200).json({
+    //   success: true,
+    //   message: 'You have successfully connected to changepassword.'
+    // });
     });
 
   // return passport.authenticate('local-changepassword', (err) => {
