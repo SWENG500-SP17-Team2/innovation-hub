@@ -4,12 +4,16 @@ import { Card, CardTitle, CardActions, CardHeader, CardText, CardMedia } from 'm
 import RaisedButton from 'material-ui/RaisedButton';
 import {ProfileStyle, changePasswordCardStyle } from '../styles';
 import Paper from 'material-ui/Paper';
+import Snackbar from 'material-ui/Snackbar';
+
 
 const UpdatePasswordForm = ({
   onSubmit,
   onChange,
   errors,
-  user
+  user,
+  snackbarOpen,
+  handleSnackbarClose
 }) => (
   <div className="current-pass-field-line">
     <Paper style={ProfileStyle} zDepth={1}>
@@ -21,12 +25,18 @@ const UpdatePasswordForm = ({
             <TextField
               floatingLabelText="New Password"
               name="password"
+              type="password"
               errorText={errors.password}
               onChange={onChange}
               value={user.password}
             />
           </div>
-
+          <Snackbar
+            open={snackbarOpen}
+            message="Password changed successfully!"
+            autoHideDuration={4000}
+            onRequestClose={handleSnackbarClose}
+          />
           <div className="button-line">
             <RaisedButton type="submit" label="Update Password" primary={true}/>
           </div>
@@ -40,7 +50,9 @@ UpdatePasswordForm.propTypes ={
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  snackbarOpen: PropTypes.bool.isRequired,
+  handleSnackbarClose: PropTypes.func.isRequired
 };
 
 export default UpdatePasswordForm;

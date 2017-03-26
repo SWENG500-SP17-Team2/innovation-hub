@@ -18,11 +18,14 @@ class UpdatePassword extends React.Component {
       errors: {},
       user: {
         password: ''
-      }
+      },
+      snackbarOpen: false
     };
 
     this.processForm = this.processForm.bind(this);
     this.changeUser  = this.changeUser.bind(this);
+    this.handleSnackbarClose  = this.handleSnackbarClose.bind(this);
+
   }
   //
   // // Change the user object
@@ -33,6 +36,13 @@ class UpdatePassword extends React.Component {
 
     this.setState({user});
   }
+
+  //close snackbar
+  handleSnackbarClose(event) {
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
   //
   // Process the form
   processForm(event) {
@@ -45,7 +55,9 @@ class UpdatePassword extends React.Component {
 
     // Create a string for an HTTP body message
   //   const name = encodeURIComponent(this.state.user.name);
-  //   const email = encodeURIComponent(this.state.user.email);
+    const storedEmail = LocalAuth.getAuthenticatedEmail();
+    console.log('stored email' + storedEmail);
+    const email = encodeURIComponent(storedEmail);
     const password = encodeURIComponent(this.state.user.password);
   //   var adminFT = false;
   //   if(this.state.user.name     == "Admin123" &&
@@ -55,7 +67,7 @@ class UpdatePassword extends React.Component {
   //   }
   //   const admin = encodeURIComponent(adminTF);
   //   const banned = encodeURIComponent('false');
-    const formData = `password=${password}`;
+    const formData = `email=${email}&password=${password}`;
 
     // Create an AJAX request
     const xhr = new XMLHttpRequest();
@@ -67,13 +79,17 @@ class UpdatePassword extends React.Component {
        if(xhr.status == 200) {
           // Success
 
-          this.setState({errors: {}});
-          //console.log('success connecting to changepassword');
-          // Set a message
-          //localStorage.setItem('successMessage', xhr.response.message);
-
-          // Make a redirect
-          //this.context.router.replace('/login');
+          const errors = xhr.response.errors ? xhr.response.errors : {};
+          errors.summary = xhr.response.message;
+          this.setState({
+            errors: {},
+            user: {
+              password: ''
+            },
+            snackbarOpen: true
+          });
+          //redirect to Dashboard
+          //this.context.router.replace('/Dashboard');
 
        } else {
           // Failure
@@ -99,11 +115,17 @@ class UpdatePassword extends React.Component {
       onChange={this.changeUser}
       errors={this.state.errors}
       user={this.state.user}
+      snackbarOpen={this.state.snackbarOpen}
+      handleSnackbarClose={this.handleSnackbarClose}
       />
     );
 
   }
 
 }
+
+UpdatePassword.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default UpdatePassword;

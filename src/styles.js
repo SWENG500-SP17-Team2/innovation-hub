@@ -85,7 +85,7 @@ const changePasswordCardStyle = {
 }
 
 const subTabStyle = {
-  backgroundColor:"#90ee90"
+  backgroundColor:"#009688"
 };
 export {
     marginSmall,

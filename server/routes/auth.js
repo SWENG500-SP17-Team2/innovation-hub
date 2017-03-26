@@ -183,54 +183,31 @@ router.post('/changePassword', (req, res, next) => {
     });
   }
 
-  //returnUser.findOne({ email: userData.email }, (err, user) => {
-  User.find({}, (err, user) => {
-    //var user = req.user;
-    //user.password = req.password;
-    const data = {
-      name: user
-    };
-    console.log('this is current user' + data.name);
-    //console.log('this is current password' + user.password);
-    // user.save((err) => {
-    //   if (err) { return done(err); }
-    //
-    //   return done(null);
-    // });
-    //
-    // return res.status(200).json({
-    //   success: true,
-    //   message: 'You have successfully connected to changepassword.'
-    // });
-    });
+    return passport.authenticate('local-changepassword', (err, userData) => {
+      if (err) {
+        if (err.name === 'MongoError' && err.code === 11000) {
+          // the 11000 Mongo code is for a duplication email error
+          // the 409 HTTP status code is for conflict error
+          return res.status(409).json({
+            success: false,
+            message: 'Check the form for errors.',
+            errors: {
+              email: 'Problems saving password.'
+            }
+          });
+        }
 
-  // return passport.authenticate('local-changepassword', (err) => {
-  //   if (err) {
-  //     if (err.name === 'MongoError' && err.code === 11000) {
-  //       // the 11000 Mongo code is for a duplication email error
-  //       // the 409 HTTP status code is for conflict error
-  //       return res.status(409).json({
-  //         success: false,
-  //         message: 'Check the form for errors.',
-  //         errors: {
-  //           email: 'Problems saving password.'
-  //         }
-  //       });
-  //     }
-  //
-  //     return res.status(400).json({
-  //       success: false,
-  //       message: 'Could not process the form.'
-  //     });
-  //   }
-  //
-  //   console.log('Errors not found after invoking passport changepassword');
-  //
-  //   return res.status(200).json({
-  //     success: true,
-  //     message: 'You have successfully changed password!'
-  //   });
-  // })(req, res, next);
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'You have successfully changed password!'
+      });
+    })(req, res, next);
 
 });
 

@@ -24,11 +24,7 @@ UserSchema.methods.comparePassword = function comparePassword(password, callback
   bcrypt.compare(password, this.password, callback);
 };
 
-
-/**
- * The pre-save hook method.
- */
-UserSchema.pre('save', function saveHook(next) {
+UserSchema.pre('save', function (next) {
   const user = this;
 
   // proceed further only if the password is modified or the user is new
@@ -48,6 +44,7 @@ UserSchema.pre('save', function saveHook(next) {
     });
   });
 });
+
 
 
 module.exports = mongoose.model('User', UserSchema);
