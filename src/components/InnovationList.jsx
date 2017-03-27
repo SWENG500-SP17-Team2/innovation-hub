@@ -44,7 +44,7 @@ class InnovationList extends React.Component {
         }
       });
       xhr.send();
-
+      
     }
 
     render() {
@@ -55,7 +55,6 @@ class InnovationList extends React.Component {
                                         <Card>
                                           <CardHeader
                                             title={item.user}
-                                            subtitle={item.user.email}
                                             avatar="https://image.shutterstock.com/z/stock-vector-reach-idea-with-human-hand-145799489.jpg"
                                           />
                                           <CardMedia overlay={<CardTitle title={item.title} subtitle="" />}>
