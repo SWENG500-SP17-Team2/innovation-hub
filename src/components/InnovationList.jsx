@@ -1,5 +1,4 @@
 import React from 'react';
-// { AppRegistry, View } from 'react-native';
 import { Card, CardTitle, CardText, CardActions, CardHeader, CardMedia } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -44,7 +43,7 @@ class InnovationList extends React.Component {
         }
       });
       xhr.send();
-      
+
     }
 
     render() {
