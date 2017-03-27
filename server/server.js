@@ -137,7 +137,7 @@ app.get("/api/innovations/:id", function(req, res) {
 app.post("/api/innovations", function(req, res) {
   var newInnovation = req.body;
 
-  if (!req.body.Name) {
+  if (!req.body.title) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
   } else {
 

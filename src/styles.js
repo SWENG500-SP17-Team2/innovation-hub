@@ -27,7 +27,7 @@ const textCenter = {
 const topBar = {
     padding: '10px 15px',
     marginBottom: '50px',
-    height: '50',
+    height: '50px',
     backgroundColor: 'darkturquoise'
 };
 
@@ -56,8 +56,24 @@ const topBarRight = {
     marginRight: '20px'
 };
 
+const ideaCard = {
+    width: '66%',
+    marginBottom: '10px',
+    marginTop: '10px',
+
+};
+const ideaCardList = {
+    flexDirection: 'column',
+    alignItems: 'center',
+    display: 'flex'
+};
 const homepageBackground = {
-  backgroundColor: '#E0EFF1'
+    backgroundColor: '#E0EFF1'
+}
+
+const ideaCardActionBar = {
+    paddingRight:'40px',
+    paddingLeft:'40px'
 }
 
 export {
@@ -71,6 +87,9 @@ export {
     topBarLeft,
     topBarRight,
     formSubmit,
+    ideaCardActionBar,
+    ideaCard,
+    ideaCardList,
     ProfileStyle,
     FaceIconStyle,
     homepageBackground
