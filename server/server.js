@@ -73,9 +73,11 @@ app.use(passport.initialize());
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
 const localQueryStrategy = require('./passport/local-query');
+const localChangepasswordStrategy = require('./passport/local-changepassword');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 passport.use('local-query', localQueryStrategy);
+passport.use('local-changepassword', localChangepasswordStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');

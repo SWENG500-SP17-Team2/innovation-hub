@@ -10,6 +10,10 @@ const marginLarge = {
     margin: '24px'
 };
 
+const marginXLarge = {
+    margin: '48px'
+}
+
 const formSubmit = {
     width: '97%',
     height: '100px',
@@ -29,6 +33,24 @@ const topBar = {
     marginBottom: '50px',
     height: '50',
     backgroundColor: 'darkturquoise'
+};
+
+const homepageTitle = {
+    fontSize: '45px',
+    lineHeight: 2,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: '16px'
+
+};
+
+const homepageSubtitle = {
+    fontSize: '30px',
+    //lineheight: 2,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: '16px'
+
 };
 
 const ProfileStyle = {
@@ -52,13 +74,25 @@ const topBarRight = {
 };
 
 const homepageBackground = {
-  backgroundColor: '#E0EFF1'
+  backgroundColor: '#009688',
+  maxWidth: '650px',
+  margin: 'auto',
+  justifyContent: 'center'
+};
+
+const changePasswordCardStyle = {
+  textAlign: 'center'
 }
 
+const subTabStyle = {
+  backgroundColor:"#009688"
+};
 export {
     marginSmall,
     marginMedium,
     marginLarge,
+    marginXLarge,
+    subTabStyle,
     style,
     textCenter,
     topBar,
@@ -67,5 +101,8 @@ export {
     formSubmit,
     ProfileStyle,
     FaceIconStyle,
-    homepageBackground
+    homepageTitle,
+    homepageSubtitle,
+    homepageBackground,
+    changePasswordCardStyle
 };
