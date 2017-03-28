@@ -3,7 +3,6 @@ const User = require('mongoose').model('User');
 const PassportLocalStrategy = require('passport-local').Strategy;
 const config = require('../config');
 
-
 /**
  * Return the Passport Local Strategy object.
  */
@@ -25,6 +24,14 @@ module.exports = new PassportLocalStrategy({
     if (!user) {
       const error = new Error('Incorrect email or password');
       error.name = 'IncorrectCredentialsError';
+
+      return done(error);
+    }
+
+    // check if a user is banned
+    if(user.banned == 'true') {
+      const error = new Error('Your account has been blocked.  Contact admin to unlock your account');
+      error.name  = 'IncorrectCredentialsError';
 
       return done(error);
     }

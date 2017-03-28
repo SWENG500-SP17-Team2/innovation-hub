@@ -6,11 +6,13 @@ import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
-import { topBar, topBarLeft, topBarRight } from '../styles';
+import { topBar, bottomBar, topBarLeft, topBarRight } from '../styles';
 import LocalAuth from '../modules/LocalAuth';
 import NavigationHome from 'material-ui/svg-icons/action/home';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import ActionCopyright from 'material-ui/svg-icons/action/copyright';
 
 const TopBase = ({children}) => (
   <div>
@@ -46,6 +48,15 @@ const TopBase = ({children}) => (
     />
 
        {children}
+
+    <FlatButton
+      labelPosition="after"
+      label="2017 Victor Azurin - Braun Brennecke - William Truong"
+      labelStyle={bottomBar}
+      icon={<ActionCopyright />}
+      disabled={true}
+    />
+
   </div>
 
 );

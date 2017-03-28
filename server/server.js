@@ -73,11 +73,19 @@ app.use(passport.initialize());
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
 const localQueryStrategy = require('./passport/local-query');
+
 const localChangepasswordStrategy = require('./passport/local-changepassword');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 passport.use('local-query', localQueryStrategy);
 passport.use('local-changepassword', localChangepasswordStrategy);
+const localUpdateStrategy = require('./passport/local-update');
+const localDeleteStrategy = require('./passport/local-delete');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+passport.use('local-query', localQueryStrategy);
+passport.use('local-update', localUpdateStrategy);
+passport.use('local-delete', localDeleteStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
@@ -88,9 +96,11 @@ app.use('/api', authCheckMiddleware);
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 const queryRoutes = require('./routes/query');
+const updateRoutes = require('./routes/update');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/query', queryRoutes);
+app.use('/update', updateRoutes);
 
 app.listen(port)
 console.log('Server listening on port ' + chalk.green(port));
@@ -133,7 +143,7 @@ app.get("/api/innovations/:id", function(req, res) {
 app.post("/api/innovations", function(req, res) {
   var newInnovation = req.body;
 
-  if (!req.body.Name) {
+  if (!req.body.title) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
   } else {
 

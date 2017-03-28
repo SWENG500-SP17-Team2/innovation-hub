@@ -12,7 +12,7 @@ const marginLarge = {
 
 const marginXLarge = {
     margin: '48px'
-}
+};
 
 const formSubmit = {
     width: '97%',
@@ -31,7 +31,7 @@ const textCenter = {
 const topBar = {
     padding: '10px 15px',
     marginBottom: '50px',
-    height: '50',
+    height: '50px',
     backgroundColor: 'darkturquoise'
 };
 
@@ -50,7 +50,11 @@ const homepageSubtitle = {
     fontWeight: 'bold',
     textAlign: 'center',
     margin: '16px'
+};
 
+const bottomBar = {
+    marginBottom: '50px',
+    fontSize: '12'
 };
 
 const ProfileStyle = {
@@ -73,6 +77,17 @@ const topBarRight = {
     marginRight: '20px'
 };
 
+const ideaCard = {
+    width: '66%',
+    marginBottom: '10px',
+    marginTop: '10px',
+
+};
+const ideaCardList = {
+    flexDirection: 'column',
+    alignItems: 'center',
+    display: 'flex'
+};
 const homepageBackground = {
   backgroundColor: '#009688',
   maxWidth: '650px',
@@ -81,8 +96,14 @@ const homepageBackground = {
 };
 
 const changePasswordCardStyle = {
-  textAlign: 'center'
-}
+  textAlign: 'center',
+  backgroundColor: '#E0EFF1'
+};
+
+const ideaCardActionBar = {
+    paddingRight:'40px',
+    paddingLeft:'40px'
+};
 
 const subTabStyle = {
   backgroundColor:"#009688"
@@ -96,9 +117,13 @@ export {
     style,
     textCenter,
     topBar,
+    bottomBar,
     topBarLeft,
     topBarRight,
     formSubmit,
+    ideaCardActionBar,
+    ideaCard,
+    ideaCardList,
     ProfileStyle,
     FaceIconStyle,
     homepageTitle,

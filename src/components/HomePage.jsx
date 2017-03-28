@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import ImageGallery from 'react-image-gallery';
 
 
+
 class HomePage extends React.Component {
 
   handleImageLoad(event) {
