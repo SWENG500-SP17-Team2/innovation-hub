@@ -31,7 +31,7 @@ class LocalAuth {
    }
 
    static isAdmin() {
-     return localStorage.getItem('admin') !== false;
+     return localStorage.getItem('admin') === 'true';
    }
 }
 

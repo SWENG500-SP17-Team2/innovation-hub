@@ -24,11 +24,9 @@ class Admin extends React.Component {
           //this.handleSelect = this.handleSelect.bind(this);
     }
 
-    //handleSelect(index) {
     componentDidMount() {
-       console.log ('componentDidMount is invoke');
+       //console.log ('componentDidMount is invoke');
 
-       //if(index === 0) {
           var rowArray = [];
           // Query all users
           const email = encodeURIComponent('Admin123@bvw.net');
@@ -39,14 +37,16 @@ class Admin extends React.Component {
           const xhr = new XMLHttpRequest();
           xhr.open('post', '/query/users');
           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          //xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
           xhr.responseType = 'json';
           xhr.addEventListener('load', () => {
              if (xhr.status === 200) {
                 // Turns a Javascript object into JSON text into JSON string.
                 var userStr = JSON.stringify(xhr.response.queryUser);
                 console.log('\nuserStr: ' + userStr);
-                var email = "";
+                var userEmail = "";
                 var userName = "";
+                var userPrivilege = "";
                 var userStatus = "";
 
                 for(var index = 0; index < userStr.length; index++) {
@@ -57,8 +57,8 @@ class Admin extends React.Component {
                       userStr.charAt(index+3) === 'i' &&
                       userStr.charAt(index+4) === 'l' )
                    {
-                     //console.log('\n ======= Detecting email pattern ====== \n');
-                     //console.log('\n ====================================== \n');
+//                     console.log('\n ======= Detecting email pattern ====== \n');
+//                     console.log('\n ====================================== \n');
                      for (var eId = index+8; eId < userStr.length; eId++) {
                         if(userStr[eId]   === '"' &&
                            userStr[eId+1] === ',' &&
@@ -66,11 +66,11 @@ class Admin extends React.Component {
                            break;
                         }
                         else {
-                          email += userStr.charAt(eId);
+                          userEmail += userStr.charAt(eId);
                         }
                      }
-                     //console.log('\nuser email is: ' + email);
-                     //console.log('\n ====================================== \n');
+//                     console.log('\nuser email is: ' + userEmail);
+//                     console.log('\n ====================================== \n');
                    }
                    // Extract user's name
                    if(userStr.charAt(index)   === '"' &&
@@ -81,8 +81,8 @@ class Admin extends React.Component {
                       userStr.charAt(index+5) === 'm' &&
                       userStr.charAt(index+6) === 'e')
                    {
-                     //console.log('\n ======= Detecting name pattern ====== \n');
-                     //console.log('\n ====================================== \n');
+//                     console.log('\n ======= Detecting name pattern ====== \n');
+//                     console.log('\n ====================================== \n');
                      for (var nId = index+10; nId < userStr.length; nId++) {
                         if(userStr[nId]   === '"' &&
                            userStr[nId+1] === ',' &&
@@ -93,28 +93,92 @@ class Admin extends React.Component {
                           userName += userStr.charAt(nId);
                         }
                      }
-                     //console.log('\nuser name is: ' + userName);
-                     //console.log('\n ====================================== \n');
+//                     console.log('\nuserName is: ' + userName);
+//                     console.log('\n ====================================== \n');
 
-                     rowArray.push({userName: userName, email: email, status:'Active'});
-                     //console.log('rowArray[0].userName: ' + rowArray[0].userName +
-                     //           '\nrowArray[0].email: ' + rowArray[0].email);
-
-                     this.setState({
-                       tableData: rowArray
-                     });
-                     // Reset the local variables
-                     userName = "";
-                     email    = "";
                    }
-                }
 
-              }
+                  // Extract user's privilege
+                  if(userStr.charAt(index)   === '"' &&
+                     userStr.charAt(index+1) === ',' &&
+                     userStr.charAt(index+2) === '"' &&
+                     userStr.charAt(index+3) === 'a' &&
+                     userStr.charAt(index+4) === 'd' &&
+                     userStr.charAt(index+5) === 'm' &&
+                     userStr.charAt(index+6) === 'i' &&
+                     userStr.charAt(index+7) === 'n')
+                  {
+//                    console.log('\n ======= Detecting admin pattern ====== \n');
+//                    console.log('\n ====================================== \n');
+                    for (var pId = index+11; pId < userStr.length; pId++) {
+                       if(userStr[pId]   === '"' &&
+                          userStr[pId+1] === ',' &&
+                          userStr[pId+2] === '"') {
+                          break;
+                       }
+                       else {
+                         userPrivilege += userStr.charAt(pId);
+                       }
+                    }
+//                    console.log('\nadmin is: ' + userPrivilege);
+//                    console.log('\n ====================================== \n');
+                  }
+
+                  // Extract user's status
+                  if(userStr.charAt(index)   === '"' &&
+                     userStr.charAt(index+1) === ',' &&
+                     userStr.charAt(index+2) === '"' &&
+                     userStr.charAt(index+3) === 'b' &&
+                     userStr.charAt(index+4) === 'a' &&
+                     userStr.charAt(index+5) === 'n' &&
+                     userStr.charAt(index+6) === 'n' &&
+                     userStr.charAt(index+7) === 'e' &&
+                     userStr.charAt(index+8) === 'd')
+                    {
+//                      console.log('\n ======= Detecting banned pattern ====== \n');
+//                      console.log('\n ====================================== \n');
+                      for (var sId = index+12; sId < userStr.length; sId++) {
+                         if(userStr[sId]   === '"' &&
+                            userStr[sId+1] === ',' &&
+                            userStr[sId+2] === '"') {
+                            break;
+                         }
+                         else {
+                           userStatus += userStr.charAt(sId);
+                         }
+                      }
+//                      console.log('\nbanned is: ' + userPrivilege);
+//                      console.log('\n ====================================== \n');
+//                      console.log('\nPUSHING userName: ' + userName +
+//                                  '\n        userEmail: ' + userEmail +
+//                                  '\n        userStatus: ' + userStatus +'\n');
+
+                      if(userPrivilege !== 'true') {
+                         if(userStatus == 'false') {
+                            userStatus = 'Active';
+                         } else {
+                            userStatus = 'Locked';
+                         }
+
+                         // Push this user object into an array
+                         rowArray.push({userName: userName, email: userEmail, status:userStatus});
+
+                         this.setState({
+                           tableData: rowArray
+                         });
+                      }
+
+                      // Reset the local variables
+                      userName   = "";
+                      userEmail  = "";
+                      userStatus = "";
+                      userPrivilege ="";
+                    }
+                  }
+                }
           });
 
           xhr.send(formData);
-       //}
-
     }
 
     render() {

@@ -16,6 +16,8 @@ const routes = {
      {path: '/',
         getComponent: (location, callback) => {
            if(LocalAuth.isUserAuthenticated()) {
+             console.log('\n ======= LocalAuth.isAdmin() ' + LocalAuth.isAdmin() +
+                         ' =======\n');
               if(LocalAuth.isAdmin()) {
                 callback(null, Admin);
               }

@@ -37,12 +37,14 @@ class SignUpPage extends React.Component {
     const name = encodeURIComponent(this.state.user.name);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
-    var adminFT = false;
+    var adminTF = false;
     if(this.state.user.name     == "Admin123" &&
-       this.state.user.password == "Admin123")
+       this.state.user.password == "Admin123" &&
+       this.state.user.email    == "Admin123@bvw.com" )
     {
-       var adminTF = true;
-    }
+       adminTF = true;
+    } 
+
     const admin = encodeURIComponent(adminTF);
     const banned = encodeURIComponent('false');
     const formData = `name=${name}&email=${email}&password=${password}&admin=${admin}&banned=${banned}`;

@@ -64,11 +64,6 @@ class LoginPage extends React.Component {
           errors: {}
         });
 
-        console.log('Welcome  ' +
-              xhr.response.loginUser.name +
-              ' \n ' + xhr.response.message +
-              ' \n admin ' + xhr.response.loginUser.admin);
-
         // change the current URL to /
         if(xhr.response.loginUser.admin === 'true') {
            this.context.router.replace('/Admin');

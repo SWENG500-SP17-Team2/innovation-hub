@@ -29,14 +29,13 @@ class PostIdea extends React.Component {
 
        e.preventDefault();
 
-       alert('The following innovation idea was submitted\nTITLE: ' +
-             this.state.textFieldTitle + ' \nDESCRIPTION: ' + this.state.textFieldValue );
+       //alert('The following innovation idea was submitted\nTITLE: ' +
+       //       this.state.textFieldTitle + ' \nDESCRIPTION: ' + this.state.textFieldValue );
        this.setState({textFieldValue: ''});
        this.setState({textFieldTitle: ''});
 
        // Make a redirect
        this.context.router.replace('/Dashboard');
-       //this.context.router.replace('/Admin');
     }
 
     render() {
