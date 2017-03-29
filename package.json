@@ -5,6 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "test": "gulp test",
+    "coverage": "jest",
     "start": "gulp start",
     "linter": "gulp lint",
     "server": "gulp serve",
@@ -71,10 +72,38 @@
     "gulp-nodemon": "2.0.6",
     "gulp-tape": "0.0.9",
     "gulp-util": "3.0.7",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2",
     "nodemon": "1.9.1",
+    "react-image-gallery": "^0.7.15",
     "redux-devtools": "3.3.1",
     "tap-min": "1.1.0",
     "tape": "4.6.2",
     "vinyl-source-stream": "1.1.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "bail": true,
+    "verbose": true,
+    "modulePaths": [
+      "<rootDir>/src"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [],
+    "env": {
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ],
+        "presets": [
+          "es2015"
+        ]
+      }
+    }
   }
 }
