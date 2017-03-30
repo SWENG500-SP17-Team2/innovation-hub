@@ -97,7 +97,7 @@ gulp.task('usage', () => {
     gutil.log(usageLines.join(os.EOL));
 });
 
-gulp.task('start', ['build', 'insert:data'], () => {
+gulp.task('start', ['build', 'insert:data', 'cov'], () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
@@ -204,3 +204,14 @@ gulp.task('insert:data', ['clean:db'], function(cb) {
 
     runCommand('mongo mockData.js', 'Insert data', cb);
 });
+
+
+var exec = require('child_process').exec;
+
+gulp.task('cov', function(cb) {
+    exec('npm run coverage', function(err, stdout, stderr) {
+       console.log(stdout);
+       console.log(stderr);
+       cb(err);
+    });
+})
