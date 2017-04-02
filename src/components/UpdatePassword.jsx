@@ -17,7 +17,8 @@ class UpdatePassword extends React.Component {
     this.state = {
       errors: {},
       user: {
-        password: ''
+        password: '',
+        currentpassword: ''
       },
       snackbarOpen: false
     };
@@ -43,32 +44,10 @@ class UpdatePassword extends React.Component {
       snackbarOpen: false,
     });
   };
-  //
-  // Process the form
-  processForm(event) {
 
-    // prevent default action
-    event.preventDefault();
-
-    //alert('Info to send to server (information\npassword: ' +
-    //      this.state.user.password + ')');
-
-    // Create a string for an HTTP body message
-  //   const name = encodeURIComponent(this.state.user.name);
-    const storedEmail = LocalAuth.getAuthenticatedEmail();
-    console.log('stored email' + storedEmail);
-    const email = encodeURIComponent(storedEmail);
-    const password = encodeURIComponent(this.state.user.password);
-  //   var adminFT = false;
-  //   if(this.state.user.name     == "Admin123" &&
-  //      this.state.user.password == "Admin123")
-  //   {
-  //      var adminTF = true;
-  //   }
-  //   const admin = encodeURIComponent(adminTF);
-  //   const banned = encodeURIComponent('false');
+  changePasswordRequest(email, password) {
+    // request to change password
     const formData = `email=${email}&password=${password}`;
-
     // Create an AJAX request
     const xhr = new XMLHttpRequest();
     xhr.open('post', 'auth/changePassword');
@@ -84,12 +63,11 @@ class UpdatePassword extends React.Component {
           this.setState({
             errors: {},
             user: {
-              password: ''
+              password: '',
+              currentpassword: ''
             },
             snackbarOpen: true
           });
-          //redirect to Dashboard
-          //this.context.router.replace('/Dashboard');
 
        } else {
           // Failure
@@ -104,6 +82,54 @@ class UpdatePassword extends React.Component {
     });
 
     xhr.send(formData);
+  }
+
+  checkPasswordRequest (email, password, currentpassword, callback){
+    const formDataCheckPassword = `email=${email}&password=${currentpassword}`;
+    // Create an AJAX request
+    const xhrpass = new XMLHttpRequest();
+    xhrpass.open('post', '/auth/login');
+    xhrpass.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhrpass.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+    xhrpass.responseType = 'json';
+    xhrpass.addEventListener('load', () => {
+       if(xhrpass.status !== 200) {
+          // Success
+
+          const errors = xhrpass.response.errors ? xhrpass.response.errors : {};
+          errors.summary = xhrpass.response.message;
+          this.setState({errors});
+          this.setState({
+            user: {
+              password: '',
+              currentpassword: ''
+            }
+          });
+          //if error skip request to change password
+
+       } else {
+         callback(email, password);
+       }
+
+    });
+
+    xhrpass.send(formDataCheckPassword);
+  }
+  //
+  // Process the form
+  processForm(event) {
+
+    // prevent default action
+    event.preventDefault();
+
+    var flag = false;
+    const storedEmail = LocalAuth.getAuthenticatedEmail();
+    const email = encodeURIComponent(storedEmail);
+    const password = encodeURIComponent(this.state.user.password);
+    const currentpassword = encodeURIComponent(this.state.user.currentpassword);
+
+    this.checkPasswordRequest(email, password, currentpassword, this.changePasswordRequest.bind(this));
+
   }
 
   // Display the object
