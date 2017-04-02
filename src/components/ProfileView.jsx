@@ -11,6 +11,16 @@ import FaceIcon from 'material-ui/svg-icons/action/face';
 import LightBulbIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import { ProfileStyle, FaceIconStyle, subTabStyle } from '../styles';
 import UpdatePassword from './UpdatePassword';
+import ReactHighcharts from 'react-highcharts';
+
+var config = {
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  },
+  series: [{
+    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 295.6, 454.4]
+  }]
+};
 
 //const ProfileView = ({userName}) => (
 class ProfileView extends React.Component {
@@ -39,7 +49,7 @@ class ProfileView extends React.Component {
         </Tab>
         <Tab icon={<AssessmentIcon />} label="Statistics" >
           <div>
-            <h2>Here goes some graphs</h2>
+            <ReactHighcharts config={config}/>
           </div>
         </Tab>
         <Tab icon={<SettingsIcon />} label="Settings" >

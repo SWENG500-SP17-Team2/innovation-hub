@@ -23,7 +23,15 @@ const UpdatePasswordForm = ({
           {errors.summary && <p className="error-message">{errors.summary}</p>}
           <div className="field-line">
             <TextField
-              floatingLabelText="New Password"
+              floatingLabelText="Type Current Password"
+              name="currentpassword"
+              type="password"
+              errorText={errors.currentpassword}
+              onChange={onChange}
+              value={user.currentpassword}
+            /><br/>
+            <TextField
+              floatingLabelText="Type New Password"
               name="password"
               type="password"
               errorText={errors.password}

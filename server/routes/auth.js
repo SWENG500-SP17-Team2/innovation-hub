@@ -173,6 +173,36 @@ router.post('/login', (req, res, next) => {
 
 });
 
+// router.post('/comparePassword', (req, res, next) => {
+//
+//   console.log('1 - this is current password from client side ' + req.body.currentpassword);
+//
+//   return passport.authenticate('local-comparepassword', (err, token, userData) => {
+//     if (err) {
+//       if (err.name === 'IncorrectCredentialsError') {
+//         return res.status(400).json({
+//           success: false,
+//           message: err.message
+//         });
+//       }
+//
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Could not process the form.'
+//       });
+//     }
+//
+//     return res.json({
+//       success: true,
+//       message: 'passwords matched!',
+//       token,
+//       loginUser: userData
+//     });
+//
+//   })(req, res, next);
+//
+// });
+
 router.post('/changePassword', (req, res, next) => {
   const validationResult = validateChangepasswordForm(req.body);
   if (!validationResult.success) {
