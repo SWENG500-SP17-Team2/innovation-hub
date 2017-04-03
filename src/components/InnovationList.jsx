@@ -9,6 +9,7 @@ import { marginMedium } from '../styles';
 import { ideaCard } from '../styles';
 import { ideaCardList, ideaCardActionBar } from '../styles';
 import LocalAuth from '../modules/LocalAuth';
+import InnovationGraph from './InnovationGraph';
 
 
 class InnovationList extends React.Component {
@@ -44,7 +45,7 @@ class InnovationList extends React.Component {
         }
       });
       xhr.send();
-      
+
     }
 
     render() {
@@ -76,6 +77,8 @@ class InnovationList extends React.Component {
                                     </div>
                             })
                         }
+                        <br />
+                        <InnovationGraph />
                         </div>);
     }
 }
