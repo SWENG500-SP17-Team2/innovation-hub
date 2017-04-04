@@ -97,7 +97,7 @@ gulp.task('usage', () => {
     gutil.log(usageLines.join(os.EOL));
 });
 
-gulp.task('start', ['build', 'insert:data', 'cov'], () => {
+gulp.task('start', ['build', 'insert:data'], () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
@@ -130,7 +130,7 @@ gulp.task('copyfiles', () => {
 
 gulp.task('buildjs', () => {
     return browserify({
-        entries: 'src/app.jsx',
+        entries: 'src/index.js',
         extensions: ['.jsx'],
         debug: true
     })
@@ -209,6 +209,7 @@ gulp.task('insert:data', ['clean:db'], function(cb) {
 var exec = require('child_process').exec;
 
 gulp.task('cov', function(cb) {
+    "use strict";
     exec('npm run coverage', function(err, stdout, stderr) {
        console.log(stdout);
        console.log(stderr);

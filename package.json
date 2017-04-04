@@ -63,6 +63,7 @@
     "babelify": "7.2.0",
     "browserify": "13.0.0",
     "del": "2.2.0",
+    "enzyme": "^2.8.0",
     "eslint": "3.9.1",
     "eslint-plugin-react": "6.6.0",
     "gulp": "3.9.1",
@@ -75,7 +76,9 @@
     "jest": "^19.0.2",
     "jest-cli": "^19.0.2",
     "nodemon": "1.9.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-image-gallery": "^0.7.15",
+    "react-test-renderer": "^15.4.2",
     "redux-devtools": "3.3.1",
     "tap-min": "1.1.0",
     "tape": "4.6.2",
@@ -83,12 +86,17 @@
   },
   "jest": {
     "collectCoverage": true,
+    "setupTestFrameworkScriptFile":"<rootDir>/__mocks__/localStorage.js",
     "bail": true,
     "verbose": true,
     "modulePaths": [
-      "<rootDir>/src"
+      "<rootDir>/src", "<rootDir>/server"
     ],
-    "collectCoverageFrom" : ["**/*.{js,jsx}", "!**/node_modules/**", "!**/vendor/**"]
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
   },
   "babel": {
     "presets": [
