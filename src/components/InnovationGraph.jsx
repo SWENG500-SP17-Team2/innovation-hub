@@ -17,40 +17,36 @@ class InnovationGraph extends React.Component {
         super(props);
 
         this.state = {
-            innovations: [{Name:"Loading...",Description:""}],
             data: [
               {name: 'Idea 1', popularity: 4},
               {name: 'Idea 2', popularity: 2},
-              {name: 'Idea 3', popularity: 6},
-              {name: 'Idea 4', popularity: 8},
             ]
         };
-
-        this.unsubMessage = store.subscribe(() => {
-            this.setState({
-                innovations: store.getState().innovations
-            });
-        })
 
         this.componentWillMount = this.componentWillMount.bind(this);
     }
 
     componentWillMount() {
 
-      // const xhr = new XMLHttpRequest();
-      // xhr.open('get', '/api/innovations');
-      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      // // set the authorization HTTP header
-      // xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
-      // xhr.responseType = 'json';
-      // xhr.addEventListener('load', () => {
-      //   if (xhr.status === 200) {
-      //     this.setState({
-      //        innovations: xhr.response.InnovationDocs
-      //     });
-      //   }
-      // });
-      // xhr.send();
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', '/api/innovations');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // set the authorization HTTP header
+      xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          const innovationdata = xhr.response.InnovationDocs;
+          var graphdata = [];
+          for (var i = 0; i < innovationdata.length; i++) {
+            graphdata.push({name: innovationdata[i]['title'], popularity: innovationdata[i]['popularity']});
+          }
+          this.setState({
+             data: graphdata
+          });
+        }
+      });
+      xhr.send();
 
     }
 
