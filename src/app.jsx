@@ -11,7 +11,7 @@ import routes from './routes.js';
 
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     render() {
 
@@ -25,9 +25,9 @@ class App extends React.Component {
     }
 }
 
-injectTapEventPlugin();
+//injectTapEventPlugin();
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('react-container')
-);
+//ReactDOM.render(
+//    <App />,
+//    document.getElementById('react-container')
+//);

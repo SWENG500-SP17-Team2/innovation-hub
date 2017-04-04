@@ -4,6 +4,9 @@ import { marginMedium, marginXLarge, textCenter, homepageTitle, homepageBackgrou
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import ImageGallery from 'react-image-gallery';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 

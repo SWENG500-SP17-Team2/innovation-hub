@@ -1,6 +1,9 @@
 import React from 'react';
 import ProfileView from './ProfileView';
 import LocalAuth from '../modules/LocalAuth';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -34,11 +37,13 @@ class ProfilePage extends React.Component {
 
   render() {
     return(
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
         <ProfileView
           userName={this.state.userName}
         />
       </div>
+      </MuiThemeProvider>
     );
   }
 }
