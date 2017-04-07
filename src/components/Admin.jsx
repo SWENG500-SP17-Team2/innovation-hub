@@ -12,7 +12,6 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ActionLock from 'material-ui/svg-icons/action/lock';
 import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
-import CommunicationMessage from 'material-ui/svg-icons/communication/message';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
@@ -279,18 +278,17 @@ class Admin extends React.Component {
         <div>
           <Card className="container"  style={marginMedium}>
               <CardTitle title="Administration Page"
-              subtitle="This is a restrict page."
+              subtitle="Manage user account and remove violated post"
               style={textCenter}/>
 
             <Tabs>
               <TabList>
                  <Tab>User List</Tab>
                  <Tab>Reports</Tab>
-                 <Tab>Dashboard</Tab>
               </TabList>
 
                <TabPanel>
-                 <h3>Displaying list of users</h3>
+                 <h3>List of registered users</h3>
                  <Table selectable={true} onRowHover = {this.handleRowHover}>
                     <TableHeader>
                        <TableRow>
@@ -307,9 +305,6 @@ class Admin extends React.Component {
                            <TableRowColumn>{row.email}</TableRowColumn>
                            <TableRowColumn>{row.status}</TableRowColumn>
                            <TableRowColumn>
-                             <IconButton>
-                               <CommunicationMessage />
-                             </IconButton>
                              <IconButton disabled={(row.status=='Locked')} onTouchTap={this.handleLock}>
                                <ActionLock />
                              </IconButton>
@@ -330,9 +325,6 @@ class Admin extends React.Component {
                   <h3>Displaying User Reports</h3>
                </TabPanel>
 
-               <TabPanel>
-                 <h3>Displaying Dashboard status</h3>
-               </TabPanel>
             </Tabs>
 
           </Card>

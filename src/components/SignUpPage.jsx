@@ -73,10 +73,10 @@ class SignUpPage extends React.Component {
 
           const errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
-          alert('SignUp ERROR (information\nname: ' +
-                this.state.user.name +
-                ' \nemail: ' + this.state.user.email +
-                ' \npassword: ' + this.state.user.password + ')');
+          //alert('SignUp ERROR (information\nname: ' +
+          //      this.state.user.name +
+          //      ' \nemail: ' + this.state.user.email +
+          //      ' \npassword: ' + this.state.user.password + ')');
 
           this.setState({errors});
        }
