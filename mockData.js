@@ -17,7 +17,10 @@ var insertInnovations = db.innovations.insert(
             image: 'https://static.pexels.com/photos/325229/pexels-photo-325229.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'Braun'
+            user: 'Braun',
+            likes: 4,
+            dislikes: 1,
+            popularity: 5
         },
         {
             title: 'Innovation 2',
@@ -25,7 +28,10 @@ var insertInnovations = db.innovations.insert(
             image:'https://static.pexels.com/photos/203213/pexels-photo-203213.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'Victor'
+            user: 'Victor',
+            likes: 20,
+            dislikes: 50,
+            popularity: 2
         },
         {
             title: 'Innovation 3',
@@ -33,7 +39,10 @@ var insertInnovations = db.innovations.insert(
             image: 'https://static.pexels.com/photos/248850/pexels-photo-248850.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'William'
+            user: 'William',
+            likes: 100,
+            dislikes: 50,
+            popularity: 8
         }
     ]
 )
