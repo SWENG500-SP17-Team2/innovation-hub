@@ -868,7 +868,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                   >
                                     <label
                                       className={undefined}
-                                      htmlFor="password-undefined-NewPassword-57185"
+                                      htmlFor="currentpassword-undefined-TypeCurrentPassword-6896"
                                       onTouchTap={undefined}
                                       style={
                                         Object {
@@ -887,11 +887,116 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                         }
                                       }
                                     >
-                                      New Password
+                                      Type Current Password
                                     </label>
                                     <input
                                       disabled={false}
-                                      id="password-undefined-NewPassword-57185"
+                                      id="currentpassword-undefined-TypeCurrentPassword-6896"
+                                      name="currentpassword"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      style={
+                                        Object {
+                                          "WebkitTapHighlightColor": "rgba(0,0,0,0)",
+                                          "appearance": "textfield",
+                                          "backgroundColor": "rgba(0,0,0,0)",
+                                          "border": "none",
+                                          "boxSizing": "border-box",
+                                          "color": "rgba(0, 0, 0, 0.87)",
+                                          "cursor": "initial",
+                                          "font": "inherit",
+                                          "height": "100%",
+                                          "marginTop": 14,
+                                          "muiPrepared": true,
+                                          "outline": "none",
+                                          "padding": 0,
+                                          "position": "relative",
+                                          "width": "100%",
+                                        }
+                                      }
+                                      type="password"
+                                      value=""
+                                    />
+                                    <div>
+                                      <hr
+                                        style={
+                                          Object {
+                                            "border": "none",
+                                            "borderBottom": "solid 1px",
+                                            "borderColor": "#e0e0e0",
+                                            "bottom": 8,
+                                            "boxSizing": "content-box",
+                                            "margin": 0,
+                                            "muiPrepared": true,
+                                            "position": "absolute",
+                                            "width": "100%",
+                                          }
+                                        }
+                                      />
+                                      <hr
+                                        style={
+                                          Object {
+                                            "border": "none",
+                                            "borderBottom": "solid 2px",
+                                            "borderColor": "#00bcd4",
+                                            "bottom": 8,
+                                            "boxSizing": "content-box",
+                                            "margin": 0,
+                                            "muiPrepared": true,
+                                            "position": "absolute",
+                                            "transform": "scaleX(0)",
+                                            "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+                                            "width": "100%",
+                                          }
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                  <br />
+                                  <div
+                                    className={undefined}
+                                    style={
+                                      Object {
+                                        "backgroundColor": "transparent",
+                                        "display": "inline-block",
+                                        "fontFamily": "Roboto, sans-serif",
+                                        "fontSize": 16,
+                                        "height": 72,
+                                        "lineHeight": "24px",
+                                        "muiPrepared": true,
+                                        "position": "relative",
+                                        "transition": "height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+                                        "width": 256,
+                                      }
+                                    }
+                                  >
+                                    <label
+                                      className={undefined}
+                                      htmlFor="password-undefined-TypeNewPassword-33544"
+                                      onTouchTap={undefined}
+                                      style={
+                                        Object {
+                                          "color": "rgba(0, 0, 0, 0.3)",
+                                          "cursor": "text",
+                                          "lineHeight": "22px",
+                                          "muiPrepared": true,
+                                          "pointerEvents": "none",
+                                          "position": "absolute",
+                                          "top": 38,
+                                          "transform": "scale(1) translate(0, 0)",
+                                          "transformOrigin": "left top",
+                                          "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
+                                          "userSelect": "none",
+                                          "zIndex": 1,
+                                        }
+                                      }
+                                    >
+                                      Type New Password
+                                    </label>
+                                    <input
+                                      disabled={false}
+                                      id="password-undefined-TypeNewPassword-33544"
                                       name="password"
                                       onBlur={[Function]}
                                       onChange={[Function]}
@@ -1226,7 +1331,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="email-undefined-Email-19531"
+            htmlFor="email-undefined-Email-22160"
             onTouchTap={undefined}
             style={
               Object {
@@ -1249,7 +1354,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="email-undefined-Email-19531"
+            id="email-undefined-Email-22160"
             name="email"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1339,7 +1444,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="password-undefined-Password-15078"
+            htmlFor="password-undefined-Password-55126"
             onTouchTap={undefined}
             style={
               Object {
@@ -1362,7 +1467,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="password-undefined-Password-15078"
+            id="password-undefined-Password-55126"
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1633,7 +1738,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="name-undefined-Name-26422"
+            htmlFor="name-undefined-Name-64053"
             onTouchTap={undefined}
             style={
               Object {
@@ -1656,7 +1761,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="name-undefined-Name-26422"
+            id="name-undefined-Name-64053"
             name="name"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1746,7 +1851,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="email-undefined-Email-24851"
+            htmlFor="email-undefined-Email-12918"
             onTouchTap={undefined}
             style={
               Object {
@@ -1769,7 +1874,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="email-undefined-Email-24851"
+            id="email-undefined-Email-12918"
             name="email"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1859,7 +1964,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="password-undefined-Password-52308"
+            htmlFor="password-undefined-Password-46244"
             onTouchTap={undefined}
             style={
               Object {
@@ -1882,7 +1987,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="password-undefined-Password-52308"
+            id="password-undefined-Password-46244"
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
