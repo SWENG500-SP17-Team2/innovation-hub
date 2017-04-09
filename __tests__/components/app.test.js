@@ -3,7 +3,7 @@ import {jsdom} from 'jsdom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { mount, shallow } from 'enzyme';
+//import { mount, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { Router,browserHistory,createMemoryHistory } from "react-router";
 import AppBar from 'material-ui/AppBar';

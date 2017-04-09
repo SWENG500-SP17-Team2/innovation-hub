@@ -195,7 +195,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                     "textTransform": "uppercase",
                     "transform": "translate(0, 0)",
                     "verticalAlign": null,
-                    "width": "33.333333333333336%",
+                    "width": "100%",
                   }
                 }
                 tabIndex={0}
@@ -239,178 +239,6 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                       viewBox="0 0 24 24"
                     >
                       <path
-                        d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"
-                      />
-                    </svg>
-                    Started Ideas
-                  </div>
-                </div>
-              </button>
-              <button
-                disabled={undefined}
-                href={undefined}
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-                onTouchEnd={[Function]}
-                onTouchStart={[Function]}
-                onTouchTap={[Function]}
-                style={
-                  Object {
-                    "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
-                    "background": "none",
-                    "border": 10,
-                    "boxSizing": "border-box",
-                    "color": "rgba(255, 255, 255, 0.7)",
-                    "cursor": "pointer",
-                    "display": "inline-block",
-                    "fontFamily": "Roboto, sans-serif",
-                    "fontSize": 14,
-                    "fontWeight": 500,
-                    "margin": 0,
-                    "muiPrepared": true,
-                    "outline": "none",
-                    "padding": 0,
-                    "textDecoration": "none",
-                    "textTransform": "uppercase",
-                    "transform": "translate(0, 0)",
-                    "verticalAlign": null,
-                    "width": "33.333333333333336%",
-                  }
-                }
-                tabIndex={0}
-                type="button"
-              >
-                <div
-                  onMouseDown={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseUp={[Function]}
-                  onTouchEnd={[Function]}
-                  onTouchStart={[Function]}
-                >
-                  <div
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "display": "flex",
-                        "flexDirection": "column",
-                        "height": 72,
-                        "justifyContent": "center",
-                      }
-                    }
-                  >
-                    <svg
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      style={
-                        Object {
-                          "color": "rgba(255, 255, 255, 0.7)",
-                          "display": "inline-block",
-                          "fill": "rgba(255, 255, 255, 0.7)",
-                          "fontSize": 24,
-                          "height": 24,
-                          "marginBottom": 5,
-                          "muiPrepared": true,
-                          "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                          "userSelect": "none",
-                          "width": 24,
-                        }
-                      }
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                      />
-                    </svg>
-                    Statistics
-                  </div>
-                </div>
-              </button>
-              <button
-                disabled={undefined}
-                href={undefined}
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-                onTouchEnd={[Function]}
-                onTouchStart={[Function]}
-                onTouchTap={[Function]}
-                style={
-                  Object {
-                    "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
-                    "background": "none",
-                    "border": 10,
-                    "boxSizing": "border-box",
-                    "color": "rgba(255, 255, 255, 0.7)",
-                    "cursor": "pointer",
-                    "display": "inline-block",
-                    "fontFamily": "Roboto, sans-serif",
-                    "fontSize": 14,
-                    "fontWeight": 500,
-                    "margin": 0,
-                    "muiPrepared": true,
-                    "outline": "none",
-                    "padding": 0,
-                    "textDecoration": "none",
-                    "textTransform": "uppercase",
-                    "transform": "translate(0, 0)",
-                    "verticalAlign": null,
-                    "width": "33.333333333333336%",
-                  }
-                }
-                tabIndex={0}
-                type="button"
-              >
-                <div
-                  onMouseDown={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseUp={[Function]}
-                  onTouchEnd={[Function]}
-                  onTouchStart={[Function]}
-                >
-                  <div
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "display": "flex",
-                        "flexDirection": "column",
-                        "height": 72,
-                        "justifyContent": "center",
-                      }
-                    }
-                  >
-                    <svg
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      style={
-                        Object {
-                          "color": "rgba(255, 255, 255, 0.7)",
-                          "display": "inline-block",
-                          "fill": "rgba(255, 255, 255, 0.7)",
-                          "fontSize": 24,
-                          "height": 24,
-                          "marginBottom": 5,
-                          "muiPrepared": true,
-                          "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                          "userSelect": "none",
-                          "width": 24,
-                        }
-                      }
-                      viewBox="0 0 24 24"
-                    >
-                      <path
                         d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
                       />
                     </svg>
@@ -438,7 +266,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                     "muiPrepared": true,
                     "position": "relative",
                     "transition": "left 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                    "width": "33.333333333333336%",
+                    "width": "100%",
                   }
                 }
               />
@@ -454,155 +282,6 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
               <div
                 style={
                   Object {
-                    "position": "relative",
-                    "textAlign": "initial",
-                    "width": "100%",
-                  }
-                }
-              >
-                <div>
-                  <div
-                    style={
-                      Object {
-                        "WebkitTapHighlightColor": "rgba(0,0,0,0)",
-                        "backgroundColor": "#ffffff",
-                        "borderRadius": "2px",
-                        "boxShadow": "0 1px 6px rgba(0, 0, 0, 0.12),
-                               0 1px 4px rgba(0, 0, 0, 0.12)",
-                        "boxSizing": "border-box",
-                        "color": "rgba(0, 0, 0, 0.87)",
-                        "fontFamily": "Roboto, sans-serif",
-                        "muiPrepared": true,
-                        "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                        "zIndex": 1,
-                      }
-                    }
-                  >
-                    <div
-                      style={
-                        Object {
-                          "paddingBottom": 8,
-                        }
-                      }
-                    >
-                      <div
-                        style={
-                          Object {
-                            "muiPrepared": true,
-                            "padding": 16,
-                            "position": "relative",
-                          }
-                        }
-                      >
-                        <span
-                          style={
-                            Object {
-                              "color": "rgba(0, 0, 0, 0.87)",
-                              "display": "block",
-                              "fontSize": 24,
-                              "lineHeight": "36px",
-                              "muiPrepared": true,
-                            }
-                          }
-                        >
-                          Here goes the user idea 1
-                        </span>
-                        <span
-                          style={
-                            Object {
-                              "color": "rgba(0, 0, 0, 0.54)",
-                              "display": "block",
-                              "fontSize": 14,
-                              "muiPrepared": true,
-                            }
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    style={
-                      Object {
-                        "WebkitTapHighlightColor": "rgba(0,0,0,0)",
-                        "backgroundColor": "#ffffff",
-                        "borderRadius": "2px",
-                        "boxShadow": "0 1px 6px rgba(0, 0, 0, 0.12),
-                               0 1px 4px rgba(0, 0, 0, 0.12)",
-                        "boxSizing": "border-box",
-                        "color": "rgba(0, 0, 0, 0.87)",
-                        "fontFamily": "Roboto, sans-serif",
-                        "muiPrepared": true,
-                        "transition": "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                        "zIndex": 1,
-                      }
-                    }
-                  >
-                    <div
-                      style={
-                        Object {
-                          "paddingBottom": 8,
-                        }
-                      }
-                    >
-                      <div
-                        style={
-                          Object {
-                            "muiPrepared": true,
-                            "padding": 16,
-                            "position": "relative",
-                          }
-                        }
-                      >
-                        <span
-                          style={
-                            Object {
-                              "color": "rgba(0, 0, 0, 0.87)",
-                              "display": "block",
-                              "fontSize": 24,
-                              "lineHeight": "36px",
-                              "muiPrepared": true,
-                            }
-                          }
-                        >
-                          Here goes the user idea 2
-                        </span>
-                        <span
-                          style={
-                            Object {
-                              "color": "rgba(0, 0, 0, 0.54)",
-                              "display": "block",
-                              "fontSize": 14,
-                              "muiPrepared": true,
-                            }
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={
-                  Object {
-                    "height": 0,
-                    "overflow": "hidden",
-                    "position": "relative",
-                    "textAlign": "initial",
-                    "width": "100%",
-                  }
-                }
-              >
-                <div>
-                  <h2>
-                    Here goes some graphs
-                  </h2>
-                </div>
-              </div>
-              <div
-                style={
-                  Object {
-                    "height": 0,
-                    "overflow": "hidden",
                     "position": "relative",
                     "textAlign": "initial",
                     "width": "100%",
@@ -661,7 +340,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                           "textTransform": "uppercase",
                           "transform": "translate(0, 0)",
                           "verticalAlign": null,
-                          "width": "50%",
+                          "width": "100%",
                         }
                       }
                       tabIndex={0}
@@ -689,69 +368,6 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                         </div>
                       </div>
                     </button>
-                    <button
-                      disabled={undefined}
-                      href={undefined}
-                      onBlur={[Function]}
-                      onClick={[Function]}
-                      onFocus={[Function]}
-                      onKeyDown={[Function]}
-                      onKeyUp={[Function]}
-                      onMouseDown={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      onMouseUp={[Function]}
-                      onTouchEnd={[Function]}
-                      onTouchStart={[Function]}
-                      onTouchTap={[Function]}
-                      style={
-                        Object {
-                          "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
-                          "background": "none",
-                          "border": 10,
-                          "boxSizing": "border-box",
-                          "color": "rgba(255, 255, 255, 0.7)",
-                          "cursor": "pointer",
-                          "display": "inline-block",
-                          "fontFamily": "Roboto, sans-serif",
-                          "fontSize": 14,
-                          "fontWeight": 500,
-                          "margin": 0,
-                          "muiPrepared": true,
-                          "outline": "none",
-                          "padding": 0,
-                          "textDecoration": "none",
-                          "textTransform": "uppercase",
-                          "transform": "translate(0, 0)",
-                          "verticalAlign": null,
-                          "width": "50%",
-                        }
-                      }
-                      tabIndex={0}
-                      type="button"
-                    >
-                      <div
-                        onMouseDown={[Function]}
-                        onMouseLeave={[Function]}
-                        onMouseUp={[Function]}
-                        onTouchEnd={[Function]}
-                        onTouchStart={[Function]}
-                      >
-                        <div
-                          style={
-                            Object {
-                              "alignItems": "center",
-                              "display": "flex",
-                              "flexDirection": "column",
-                              "height": 48,
-                              "justifyContent": "center",
-                            }
-                          }
-                        >
-                          Another User Setting
-                        </div>
-                      </div>
-                    </button>
                   </div>
                   <div
                     style={
@@ -772,7 +388,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                           "muiPrepared": true,
                           "position": "relative",
                           "transition": "left 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms",
-                          "width": "50%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -868,7 +484,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                   >
                                     <label
                                       className={undefined}
-                                      htmlFor="currentpassword-undefined-TypeCurrentPassword-6896"
+                                      htmlFor="currentpassword-undefined-TypeCurrentPassword-31049"
                                       onTouchTap={undefined}
                                       style={
                                         Object {
@@ -891,7 +507,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                     </label>
                                     <input
                                       disabled={false}
-                                      id="currentpassword-undefined-TypeCurrentPassword-6896"
+                                      id="currentpassword-undefined-TypeCurrentPassword-31049"
                                       name="currentpassword"
                                       onBlur={[Function]}
                                       onChange={[Function]}
@@ -973,7 +589,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                   >
                                     <label
                                       className={undefined}
-                                      htmlFor="password-undefined-TypeNewPassword-33544"
+                                      htmlFor="password-undefined-TypeNewPassword-39767"
                                       onTouchTap={undefined}
                                       style={
                                         Object {
@@ -996,7 +612,7 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                                     </label>
                                     <input
                                       disabled={false}
-                                      id="password-undefined-TypeNewPassword-33544"
+                                      id="password-undefined-TypeNewPassword-39767"
                                       name="password"
                                       onBlur={[Function]}
                                       onChange={[Function]}
@@ -1227,21 +843,6 @@ exports[`Render Profile page Renders Snapshot ProfilePage 1`] = `
                         </div>
                       </div>
                     </div>
-                    <div
-                      style={
-                        Object {
-                          "height": 0,
-                          "overflow": "hidden",
-                          "position": "relative",
-                          "textAlign": "initial",
-                          "width": "100%",
-                        }
-                      }
-                    >
-                      <h1>
-                        Another user setting
-                      </h1>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -1331,7 +932,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="email-undefined-Email-22160"
+            htmlFor="email-undefined-Email-404"
             onTouchTap={undefined}
             style={
               Object {
@@ -1354,7 +955,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="email-undefined-Email-22160"
+            id="email-undefined-Email-404"
             name="email"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1444,7 +1045,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="password-undefined-Password-55126"
+            htmlFor="password-undefined-Password-17265"
             onTouchTap={undefined}
             style={
               Object {
@@ -1467,7 +1068,7 @@ exports[`Render login page Renders Snapshot LoginPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="password-undefined-Password-55126"
+            id="password-undefined-Password-17265"
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1738,7 +1339,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="name-undefined-Name-64053"
+            htmlFor="name-undefined-Name-32528"
             onTouchTap={undefined}
             style={
               Object {
@@ -1761,7 +1362,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="name-undefined-Name-64053"
+            id="name-undefined-Name-32528"
             name="name"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1851,7 +1452,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="email-undefined-Email-12918"
+            htmlFor="email-undefined-Email-30830"
             onTouchTap={undefined}
             style={
               Object {
@@ -1874,7 +1475,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="email-undefined-Email-12918"
+            id="email-undefined-Email-30830"
             name="email"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1964,7 +1565,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
         >
           <label
             className={undefined}
-            htmlFor="password-undefined-Password-46244"
+            htmlFor="password-undefined-Password-38379"
             onTouchTap={undefined}
             style={
               Object {
@@ -1987,7 +1588,7 @@ exports[`Render signup page Renders Snapshot SignUpPage 1`] = `
           </label>
           <input
             disabled={false}
-            id="password-undefined-Password-46244"
+            id="password-undefined-Password-38379"
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
