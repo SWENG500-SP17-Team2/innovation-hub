@@ -13,7 +13,7 @@ import ActionLock from 'material-ui/svg-icons/action/lock';
 import ActionLockOpen from 'material-ui/svg-icons/action/lock-open';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-
+import Dialog from 'material-ui/Dialog';
 
 /**
  * Main Admin class
