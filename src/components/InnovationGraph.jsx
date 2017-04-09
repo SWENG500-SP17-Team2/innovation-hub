@@ -26,6 +26,13 @@ class InnovationGraph extends React.Component {
         this.componentWillMount = this.componentWillMount.bind(this);
     }
 
+    rankPopularity(pos, n) {
+      var z, phat;
+      z = 1.96;
+      phat = 1 * pos / n;
+      return (phat + z*z/(2*n) - z * Math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n);
+    }
+
     componentWillMount() {
 
       const xhr = new XMLHttpRequest();
@@ -39,7 +46,9 @@ class InnovationGraph extends React.Component {
           const innovationdata = xhr.response.InnovationDocs;
           var graphdata = [];
           for (var i = 0; i < innovationdata.length; i++) {
-            graphdata.push({name: innovationdata[i]['title'], popularity: innovationdata[i]['popularity']});
+            var positiveVotes = innovationdata[i]['likes'];
+            var totalVotes = positiveVotes + innovationdata[i]['dislikes'];
+            graphdata.push({name: innovationdata[i]['title'], popularity: this.rankPopularity(positiveVotes, totalVotes)});
           }
           this.setState({
              data: graphdata
