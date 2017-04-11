@@ -83,6 +83,12 @@ const ideaCard = {
     marginTop: '10px',
 
 };
+const commentCard = {
+    marginBottom: '5px',
+    marginTop: '5px',
+    marginLeft: '5px',
+    marginRight: '5px',
+};
 const ideaCardList = {
     flexDirection: 'column',
     alignItems: 'center',
@@ -129,5 +135,6 @@ export {
     homepageTitle,
     homepageSubtitle,
     homepageBackground,
-    changePasswordCardStyle
+    changePasswordCardStyle,
+    commentCard
 };

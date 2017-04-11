@@ -107,6 +107,7 @@ console.log('Server listening on port ' + chalk.green(port));
 
 var INNOVATIONS_COLLECTION = "innovations";
 var COMMENTS_COLLECTION = "comments";
+var LIKES_COLLECTION = "likes";
 
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
@@ -171,33 +172,33 @@ app.delete("/api/innovations/:id", function(req, res) {
   });
 });
 
+app.put("/api/innovations/report/:id", function(req, res) {
+  //TODO Better error message if ID is not found in database
+  db.collection(INNOVATIONS_COLLECTION).update({_id: new ObjectID(req.params.parentid)},{$set: {reported: true}}, function(err, result) {
+      if (err) {
+          handleError(res, err.message, "Failed to report innovation");
+      } else {
+          res.status(200).json(req.params.id)
+      }
+  })
+});
+
 
 ////////////
 //COMMENTS//
 ////////////
 
 
-app.get('/user_data', function(req, res) {
-            //console.log(req.user.name);
-            if (req.user === undefined) {
-                // The user is not logged in
-                res.status(200).json({username: "undefined user"});
-            } else {
-                res.status(200).json({
-                    username: req.user
-                });
-            }
-});
 
 app.post("/api/comments", function(req, res) {
   var newComment = req.body;
-
+console.log(req.body);
   if (!req.body.parentid) {
     handleError(res, "Invalid user input", "Must provide a ParentID.", 400);
     } else if (!req.body.text){
     handleError(res, "Invalid user input", "Must provide a 'text' field.",400);
     } else {
-
+    newComment.parentid = new ObjectID(newComment.parentid);
     newComment.CreatedDate = new Date();
     newComment.ModifiedDate = new Date();
 
@@ -223,13 +224,89 @@ app.get("/api/comments", function(req, res) {
 
 
 app.get("/api/comments/:parentid", function(req, res) {
-    console.log(req.params.parentid)
   //TODO Better error message if ID is not found in database
-  db.collection(COMMENTS_COLLECTION).find({parentid: req.params.parentid}).toArray(function(err, docs) {
+  db.collection(COMMENTS_COLLECTION).find({parentid: new ObjectID(req.params.parentid)}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get comments.");
     } else {
       res.status(200).json(docs);
     }
   });
+});
+
+app.put("/api/comments/report/:id", function(req, res) {
+  //TODO Better error message if ID is not found in database
+  db.collection(COMMENTS_COLLECTION).update({_id: new ObjectID(req.params.id)},{$set: {reported: true}}, function(err, result) {
+      if (err) {
+          handleError(res, err.message, "Failed to report comment");
+      } else {
+          res.status(200).json(req.params.id)
+      }
+  })
+});
+
+////////////
+//LIKES//
+////////////
+
+
+app.post("/api/likes", function(req, res) {
+  var newLike = req.body;
+
+  if (!req.body.parentid) {
+    handleError(res, "Invalid user input", "Must provide a ParentID.", 400);
+    } else {
+    newLike.parentid = new ObjectID(newLike.parentid);
+
+    newLike.CreatedDate = new Date();
+    newLike.ModifiedDate = new Date();
+
+    db.collection(LIKES_COLLECTION).insertOne(newLike, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create like.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+app.get("/api/likes", function(req, res) {
+  db.collection(LIKES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get likes.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
+app.get("/api/likes/:parentid", function(req, res) {
+  //TODO Better error message if ID is not found in database
+  db.collection(LIKES_COLLECTION).find({parentid: new ObjectID(req.params.parentid)}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get likes.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+
+////////////
+//USER DATA//
+////////////
+
+
+app.get('/user_data', function(req, res) {
+            //console.log(req.user.name);
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.status(200).json({username: "undefined user"});
+            } else {
+                res.status(200).json({
+                    username: req.user
+                });
+            }
 });

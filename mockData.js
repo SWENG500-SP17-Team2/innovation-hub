@@ -17,7 +17,8 @@ var insertInnovations = db.innovations.insert(
             image: 'https://static.pexels.com/photos/325229/pexels-photo-325229.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'Braun'
+            user: 'Mock User 1',
+            userEmail: 'User1@mock.com'
         },
         {
             title: 'Innovation 2',
@@ -25,7 +26,8 @@ var insertInnovations = db.innovations.insert(
             image:'https://static.pexels.com/photos/203213/pexels-photo-203213.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'Victor'
+            user: 'Mock User 2',
+            userEmail: 'User2@mock.com'
         },
         {
             title: 'Innovation 3',
@@ -33,7 +35,8 @@ var insertInnovations = db.innovations.insert(
             image: 'https://static.pexels.com/photos/248850/pexels-photo-248850.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
-            user: 'William'
+            user: 'Mock User 3',
+            userEmail: 'User3@mock.com'
         }
     ]
 )
@@ -49,55 +52,91 @@ var insertComments = db.comments.insert(
             parentid: innovations[0],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 3',
+            userEmail: 'User3@mock.com'
         },
         {
             parentid: innovations[0],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 2',
+            userEmail: 'User2@mock.com'
         },
         {
             parentid: innovations[0],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 1',
+            userEmail: 'User1@mock.com'
         },
         {
             parentid: innovations[1],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 1',
+            userEmail: 'User1@mock.com'
         },
         {
             parentid: innovations[1],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 3',
+            userEmail: 'User3@mock.com'
         },
         {
             parentid: innovations[2],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 2',
+            userEmail: 'User2@mock.com'
         },
         {
             parentid: innovations[2],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 2',
+            userEmail: 'User2@mock.com'
         },
         {
             parentid: innovations[2],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
-            ModifiedDate: ISODate()
+            ModifiedDate: ISODate(),
+            user: 'Mock User 3',
+            userEmail: 'User3@mock.com'
         },
     ]
 );
 
 var insertLikes = db.likes.insert(
     [
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
         {
             parentid: innovations[0],
             CreatedDate: ISODate(),
@@ -131,6 +170,66 @@ var insertLikes = db.likes.insert(
         {
             parentid: innovations[2],
             tCreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
             ModifiedDate: ISODate()
         },
         {

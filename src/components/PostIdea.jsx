@@ -47,7 +47,8 @@ class PostIdea extends React.Component {
       const title = encodeURIComponent(this.state.textFieldTitle);
       const image = encodeURIComponent(this.state.textFieldPictureURL);
       const user = LocalAuth.getAuthenticatedUser();
-      const formData = `title=${title}&description=${description}&user=${user}&image=${image}`;
+      const userEmail = LocalAuth.getAuthenticatedEmail();
+      const formData = `title=${title}&description=${description}&user=${user}&image=${image}&userEmail=${userEmail}`;
       console.log(image);
       // create an AJAX request
       const xhr = new XMLHttpRequest();
