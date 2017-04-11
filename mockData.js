@@ -19,6 +19,10 @@ var insertInnovations = db.innovations.insert(
             ModifiedDate: ISODate(),
             user: 'Mock User 1',
             userEmail: 'User1@mock.com'
+            user: 'Braun',
+            likes: 4,
+            dislikes: 1,
+            popularity: 5
         },
         {
             title: 'Innovation 2',
@@ -28,6 +32,10 @@ var insertInnovations = db.innovations.insert(
             ModifiedDate: ISODate(),
             user: 'Mock User 2',
             userEmail: 'User2@mock.com'
+            user: 'Victor',
+            likes: 20,
+            dislikes: 50,
+            popularity: 2
         },
         {
             title: 'Innovation 3',
@@ -37,6 +45,10 @@ var insertInnovations = db.innovations.insert(
             ModifiedDate: ISODate(),
             user: 'Mock User 3',
             userEmail: 'User3@mock.com'
+            user: 'William',
+            likes: 100,
+            dislikes: 50,
+            popularity: 8
         }
     ]
 )

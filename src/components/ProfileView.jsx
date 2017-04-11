@@ -27,29 +27,11 @@ class ProfileView extends React.Component {
         <img src="https://arielle.com.au/wp-content/uploads/2016/04/nature-purple-mountains-light.jpg" />
       </CardMedia>
       <Tabs>
-        <Tab icon={<LightBulbIcon />} label="Started Ideas" >
-          <div>
-            <Card>
-              <CardTitle title="Here goes the user idea 1" />
-            </Card>
-            <Card>
-              <CardTitle title="Here goes the user idea 2" />
-            </Card>
-          </div>
-        </Tab>
-        <Tab icon={<AssessmentIcon />} label="Statistics" >
-          <div>
-            <h2>Here goes some graphs</h2>
-          </div>
-        </Tab>
         <Tab icon={<SettingsIcon />} label="Settings" >
             <Tabs tabItemContainerStyle={subTabStyle}>
               <Tab label="Change User Password">
                 <UpdatePassword />
               </Tab >
-              <Tab label="Another User Setting">
-                <h1>Another user setting</h1>
-              </Tab>
             </Tabs>
         </Tab>
       </Tabs>

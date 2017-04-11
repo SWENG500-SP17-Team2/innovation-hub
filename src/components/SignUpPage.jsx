@@ -1,5 +1,8 @@
 import React, {PropTypes} from 'react';
 import SignUpForm from './SignUpForm';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 class SignUpPage extends React.Component {
   constructor(props, context) {
@@ -70,10 +73,10 @@ class SignUpPage extends React.Component {
 
           const errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
-          alert('SignUp ERROR (information\nname: ' +
-                this.state.user.name +
-                ' \nemail: ' + this.state.user.email +
-                ' \npassword: ' + this.state.user.password + ')');
+          //alert('SignUp ERROR (information\nname: ' +
+          //      this.state.user.name +
+          //      ' \nemail: ' + this.state.user.email +
+          //      ' \npassword: ' + this.state.user.password + ')');
 
           this.setState({errors});
        }
@@ -87,12 +90,14 @@ class SignUpPage extends React.Component {
   render() {
 
     return  (
+      <MuiThemeProvider  muiTheme={getMuiTheme(lightBaseTheme)}>
       <SignUpForm
           onSubmit={this.processForm}
           onChange={this.changeUser}
           errors={this.state.errors}
           user={this.state.user}
         />
+      </MuiThemeProvider>
     );
 
   }

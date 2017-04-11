@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
 import LoginForm from './LoginForm';
 import LocalAuth from '../modules/LocalAuth';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class LoginPage extends React.Component {
   constructor(props, context) {
@@ -91,6 +94,7 @@ class LoginPage extends React.Component {
   render() {
 
     return  (
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <LoginForm
           onSubmit={this.processForm}
           onChange={this.changeUser}
@@ -98,6 +102,7 @@ class LoginPage extends React.Component {
           successMessage={this.state.successMessage}
           user={this.state.user}
         />
+      </MuiThemeProvider>
     );
 
   }

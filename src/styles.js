@@ -14,6 +14,12 @@ const marginXLarge = {
     margin: '48px'
 };
 
+const marginAuto = {
+    margin: 'auto',
+    textAlign: 'center',
+    fontFamily: 'Cochin'
+};
+
 const formSubmit = {
     width: '97%',
     height: '100px',
@@ -119,6 +125,7 @@ export {
     marginMedium,
     marginLarge,
     marginXLarge,
+    marginAuto,
     subTabStyle,
     style,
     textCenter,

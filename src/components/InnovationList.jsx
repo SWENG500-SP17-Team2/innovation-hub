@@ -10,6 +10,7 @@ import { ideaCard } from '../styles';
 import { ideaCardList, ideaCardActionBar } from '../styles';
 import LocalAuth from '../modules/LocalAuth';
 import IdeaCard from './IdeaCard'
+import InnovationGraph from './InnovationGraph';
 
 
 class InnovationList extends React.Component {
@@ -55,6 +56,8 @@ class InnovationList extends React.Component {
                             return  <IdeaCard idea={item}/>
                             })
                         }
+                        <br />
+                        <InnovationGraph />
                         </div>);
     }
 }
