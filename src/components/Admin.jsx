@@ -29,13 +29,22 @@ class Admin extends React.Component {
           //  userName: 'William Elliott',
           //  email : 'welliot0@aol.com'
           //},],
-          selectedEmail:''
+          reportPost : [{
+            id: '',
+            title : '',
+            userEmail: ''
+          }],
+          selectedEmail:'',
+          selectedpostId:''
           };
 
           this.handleLock = this.handleLock.bind(this);
           this.handleUnLock = this.handleUnLock.bind(this);
           this.handleDelete = this.handleDelete.bind(this);
           this.handleRowHover = this.handleRowHover.bind(this);
+          this.handleReportRowHover = this.handleReportRowHover.bind(this);
+          this.handleDeleteReport = this.handleDeleteReport.bind(this);
+          this.queryReport= this.queryReport.bind(this);
     }
 
 /**
@@ -43,6 +52,7 @@ class Admin extends React.Component {
 */
     componentDidMount() {
        //console.log ('componentDidMount is invoke');
+          this.queryReport();
 
           var rowArray = [];
           // Query all users
@@ -269,6 +279,49 @@ class Admin extends React.Component {
       this.state.selectedEmail = this.state.tableData[rowNumber].email;
     }
 
+    /**
+     * Routine to detect current rowNumber
+    */
+    handleReportRowHover (rowNumber) {
+       this.state.selectedpostId = this.state.reportPost[rowNumber].id;
+       //console.log('\nReportRowHover is invoked with selectedpostId ' + this.state.selectedpostId);
+    }
+
+    handleDeleteReport () {
+       console.log('\nDeleting postId : ' + this.state.selectedpostId);
+    }
+
+    queryReport() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', '/api/innovations');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // set the authorization HTTP header
+      xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+           var PostStr = JSON.stringify(xhr.response.InnovationDocs);
+           console.log('\nPostStr: ' + PostStr);
+           const innovationdata = xhr.response.InnovationDocs;
+           var reportData = [];
+           for (var i = 0; i < innovationdata.length; i++) {
+             var id        = innovationdata[i]['_id'];
+             var title     = innovationdata[i]['title'];
+             var userEmail = innovationdata[i]['userEmail'];
+             console.log('\nid: ' + id +
+                         '\ntitle: ' + title +
+                         '\nuserEmail: ' + userEmail);
+             reportData.push({id: id, title: title, userEmail: userEmail});
+           }
+           this.setState({
+             reportPost : reportData
+           });
+        }
+      });
+      //xhr.send(formData);
+      xhr.send();
+    }
+
 /**
  * Render function of Admin class
 */
@@ -322,7 +375,31 @@ class Admin extends React.Component {
                </TabPanel>
 
                <TabPanel>
-                  <h3>Displaying User Reports</h3>
+                  <h3>List of violated posts being reported</h3>
+                  <Table selectable={true} onRowHover = {this.handleReportRowHover}>
+                    <TableHeader>
+                       <TableRow>
+                         <TableHeaderColumn>Post Topic</TableHeaderColumn>
+                         <TableHeaderColumn>Author (e-mail)</TableHeaderColumn>
+                         <TableHeaderColumn>Reported by (e-mail) </TableHeaderColumn>
+                         <TableHeaderColumn>Actions</TableHeaderColumn>
+                       </TableRow>
+                    </TableHeader>
+                    <TableBody showRowHover={true}>
+                      {this.state.reportPost.map( (row, index) => (
+                        <TableRow key={index} selected={row.selected} >
+                          <TableRowColumn>{row.title}</TableRowColumn>
+                          <TableRowColumn>{row.userEmail}</TableRowColumn>
+                          <TableRowColumn>{row.userEmail}</TableRowColumn>
+                          <TableRowColumn>
+                            <IconButton disabled={false} onTouchTap={this.handleDeleteReport}>
+                              <ActionDelete />
+                            </IconButton>
+                          </TableRowColumn>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                </TabPanel>
 
             </Tabs>
