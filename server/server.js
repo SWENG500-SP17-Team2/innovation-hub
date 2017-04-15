@@ -174,7 +174,7 @@ app.delete("/api/innovations/:id", function(req, res) {
 
 app.put("/api/innovations/report/:id", function(req, res) {
   //TODO Better error message if ID is not found in database
-  db.collection(INNOVATIONS_COLLECTION).update({_id: new ObjectID(req.params.parentid)},{$set: {reported: true}}, function(err, result) {
+  db.collection(INNOVATIONS_COLLECTION).update({_id: new ObjectID(req.params.id)},{$set: {reported: true}}, function(err, result) {
       if (err) {
           handleError(res, err.message, "Failed to report innovation");
       } else {
