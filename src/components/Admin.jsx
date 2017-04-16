@@ -32,7 +32,8 @@ class Admin extends React.Component {
           reportPost : [{
             id: '',
             title : '',
-            userEmail: ''
+            userEmail: '',
+            createdDate: ''
           }],
           selectedEmail:'',
           selectedpostId:''
@@ -64,13 +65,12 @@ class Admin extends React.Component {
           const xhr = new XMLHttpRequest();
           xhr.open('post', '/query/users');
           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-          //xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
           xhr.responseType = 'json';
           xhr.addEventListener('load', () => {
              if (xhr.status === 200) {
                 // Turns a Javascript object into JSON text into JSON string.
                 var userStr = JSON.stringify(xhr.response.queryUser);
-                console.log('\nuserStr: ' + userStr);
+                //console.log('\nuserStr: ' + userStr);
                 var userEmail = "";
                 var userName = "";
                 var userPrivilege = "";
@@ -223,8 +223,6 @@ class Admin extends React.Component {
     handleUnLock (event) {
       event.preventDefault();
 
-      //alert("handleUnLock routine is called. selectedEmail : " +this.state.selectedEmail);
-
       const email = encodeURIComponent(this.state.selectedEmail);
       const password = encodeURIComponent('false');
       const formData = `email=${email}&password=${password}`;
@@ -251,7 +249,6 @@ class Admin extends React.Component {
     handleDelete (event) {
       event.preventDefault();
 
-      //alert("handleDelete routine is called. selectedEmail : " +this.state.selectedEmail);
       const email = encodeURIComponent(this.state.selectedEmail);
       const password = encodeURIComponent(this.state.selectedEmail);
       const formData = `email=${email}&password=${password}`;
@@ -284,11 +281,24 @@ class Admin extends React.Component {
     */
     handleReportRowHover (rowNumber) {
        this.state.selectedpostId = this.state.reportPost[rowNumber].id;
-       //console.log('\nReportRowHover is invoked with selectedpostId ' + this.state.selectedpostId);
     }
 
-    handleDeleteReport () {
-       console.log('\nDeleting postId : ' + this.state.selectedpostId);
+    handleDeleteReport (event) {
+       event.preventDefault();
+       //console.log('\nDeleting postId : ' + this.state.selectedpostId);
+       // create an AJAX request
+       const xhr = new XMLHttpRequest();
+       xhr.open('delete', '/api/innovations/' + this.state.selectedpostId);
+       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       // set the authorization HTTP header
+       xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+       xhr.responseType = 'json';
+       xhr.addEventListener('load', () => {
+         if (xhr.status === 200) {
+            alert('\nSuccessuful deleting postId : ' + this.state.selectedpostId);
+         }
+       });
+       xhr.send();
     }
 
     queryReport() {
@@ -300,25 +310,30 @@ class Admin extends React.Component {
       xhr.responseType = 'json';
       xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
-           var PostStr = JSON.stringify(xhr.response.InnovationDocs);
-           console.log('\nPostStr: ' + PostStr);
+           //var PostStr = JSON.stringify(xhr.response.InnovationDocs);
+           //console.log('\nPostStr: ' + PostStr);
            const innovationdata = xhr.response.InnovationDocs;
            var reportData = [];
            for (var i = 0; i < innovationdata.length; i++) {
-             var id        = innovationdata[i]['_id'];
-             var title     = innovationdata[i]['title'];
-             var userEmail = innovationdata[i]['userEmail'];
-             console.log('\nid: ' + id +
-                         '\ntitle: ' + title +
-                         '\nuserEmail: ' + userEmail);
-             reportData.push({id: id, title: title, userEmail: userEmail});
+             var id              = innovationdata[i]['_id'];
+             var title           = innovationdata[i]['title'];
+             var userEmail       = innovationdata[i]['userEmail'];
+             var raw_createdDate = innovationdata[i]['CreatedDate'];
+             // Remove the timestamp out of CreatedDate string
+             var createdDate     = raw_createdDate.substring(0,10);
+             if(innovationdata[i]['reported']) {
+                console.log('\nid: ' + id +
+                            '\ntitle: ' + title +
+                            '\nuserEmail: ' + userEmail +
+                            '\ncreatedDate: ' + createdDate);
+                reportData.push({id: id, title: title, userEmail: userEmail, createdDate: createdDate});
+             }
            }
            this.setState({
              reportPost : reportData
            });
         }
       });
-      //xhr.send(formData);
       xhr.send();
     }
 
@@ -331,7 +346,7 @@ class Admin extends React.Component {
         <div>
           <Card className="container"  style={marginMedium}>
               <CardTitle title="Administration Page"
-              subtitle="Manage user account and remove violated post"
+              subtitle="Manage user account and violated posts"
               style={textCenter}/>
 
             <Tabs>
@@ -380,8 +395,8 @@ class Admin extends React.Component {
                     <TableHeader>
                        <TableRow>
                          <TableHeaderColumn>Post Topic</TableHeaderColumn>
-                         <TableHeaderColumn>Author (e-mail)</TableHeaderColumn>
-                         <TableHeaderColumn>Reported by (e-mail) </TableHeaderColumn>
+                         <TableHeaderColumn>Author's e-mail</TableHeaderColumn>
+                         <TableHeaderColumn>Created Date </TableHeaderColumn>
                          <TableHeaderColumn>Actions</TableHeaderColumn>
                        </TableRow>
                     </TableHeader>
@@ -390,7 +405,7 @@ class Admin extends React.Component {
                         <TableRow key={index} selected={row.selected} >
                           <TableRowColumn>{row.title}</TableRowColumn>
                           <TableRowColumn>{row.userEmail}</TableRowColumn>
-                          <TableRowColumn>{row.userEmail}</TableRowColumn>
+                          <TableRowColumn>{row.createdDate}</TableRowColumn>
                           <TableRowColumn>
                             <IconButton disabled={false} onTouchTap={this.handleDeleteReport}>
                               <ActionDelete />
