@@ -269,6 +269,15 @@ app.put("/api/comments/report/:id", function(req, res) {
     })
 });
 
+app.get("/api/comments/report", function(req, res) {
+  db.collection(COMMENTS_COLLECTION).find({reported: true}).toArray(function(err, docs) {
+      if (err) {
+          handleError(res, err.message, "Failed to get report flag");
+      } else {
+          res.status(200).json(docs);
+      }
+  })
+});
 ////////////
 //LIKES//
 ////////////

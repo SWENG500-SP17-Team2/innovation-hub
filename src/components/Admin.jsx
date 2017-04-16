@@ -36,13 +36,25 @@ class Admin extends React.Component {
             //  userName: 'William Elliott',
             //  email : 'welliot0@aol.com'
             //},],
-            selectedEmail: ''
+            reportPost: [
+                {
+                    id: '',
+                    title: '',
+                    userEmail: '',
+                    createdDate: ''
+                }
+            ],
+            selectedEmail: '',
+            selectedpostId: ''
         };
 
         this.handleLock = this.handleLock.bind(this);
         this.handleUnLock = this.handleUnLock.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleRowHover = this.handleRowHover.bind(this);
+        this.handleReportRowHover = this.handleReportRowHover.bind(this);
+        this.handleDeleteReport = this.handleDeleteReport.bind(this);
+        this.queryReport = this.queryReport.bind(this);
     }
 
     /**
@@ -50,6 +62,7 @@ class Admin extends React.Component {
 */
     componentDidMount() {
         //console.log ('componentDidMount is invoke');
+        this.queryReport();
 
         var rowArray = [];
         // Query all users
@@ -61,13 +74,12 @@ class Admin extends React.Component {
         const xhr = new XMLHttpRequest();
         xhr.open('post', '/query/users');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        //xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
                 // Turns a Javascript object into JSON text into JSON string.
                 var userStr = JSON.stringify(xhr.response.queryUser);
-                console.log('\nuserStr: ' + userStr);
+                //console.log('\nuserStr: ' + userStr);
                 var userEmail = "";
                 var userName = "";
                 var userPrivilege = "";
@@ -177,8 +189,6 @@ class Admin extends React.Component {
     handleUnLock(event) {
         event.preventDefault();
 
-        //alert("handleUnLock routine is called. selectedEmail : " +this.state.selectedEmail);
-
         const email = encodeURIComponent(this.state.selectedEmail);
         const password = encodeURIComponent('false');
         const formData = `email=${email}&password=${password}`;
@@ -205,7 +215,6 @@ class Admin extends React.Component {
     handleDelete(event) {
         event.preventDefault();
 
-        //alert("handleDelete routine is called. selectedEmail : " +this.state.selectedEmail);
         const email = encodeURIComponent(this.state.selectedEmail);
         const password = encodeURIComponent(this.state.selectedEmail);
         const formData = `email=${email}&password=${password}`;
@@ -234,6 +243,62 @@ class Admin extends React.Component {
     }
 
     /**
+     * Routine to detect current rowNumber
+    */
+    handleReportRowHover(rowNumber) {
+        this.state.selectedpostId = this.state.reportPost[rowNumber].id;
+    }
+
+    handleDeleteReport(event) {
+        event.preventDefault();
+        //console.log('\nDeleting postId : ' + this.state.selectedpostId);
+        // create an AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open('delete', '/api/innovations/' + this.state.selectedpostId);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // set the authorization HTTP header
+        xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                alert('\nSuccessuful deleting postId : ' + this.state.selectedpostId);
+            }
+        });
+        xhr.send();
+    }
+
+    queryReport() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', '/api/innovations');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // set the authorization HTTP header
+        xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                //var PostStr = JSON.stringify(xhr.response.InnovationDocs);
+                //console.log('\nPostStr: ' + PostStr);
+                const innovationdata = xhr.response.InnovationDocs;
+                var reportData = [];
+                for (var i = 0; i < innovationdata.length; i++) {
+                    var id = innovationdata[i]['_id'];
+                    var title = innovationdata[i]['title'];
+                    var userEmail = innovationdata[i]['userEmail'];
+                    var raw_createdDate = innovationdata[i]['CreatedDate'];
+                    // Remove the timestamp out of CreatedDate string
+                    var createdDate = raw_createdDate.substring(0, 10);
+                    if (innovationdata[i]['reported']) {
+                        console.log('\nid: ' + id + '\ntitle: ' + title + '\nuserEmail: ' + userEmail + '\ncreatedDate: ' + createdDate);
+                        reportData.push({id: id, title: title, userEmail: userEmail, createdDate: createdDate});
+                    }
+                }
+                this.setState({reportPost: reportData});
+            }
+        });
+        xhr.send();
+    }
+
+    /**
  * Render function of Admin class
 */
     render() {
@@ -241,7 +306,7 @@ class Admin extends React.Component {
         return (
             <div>
                 <Card className="container" style={marginMedium}>
-                    <CardTitle title="Administration Page" subtitle="Manage user account and remove violated post" style={textCenter}/>
+                    <CardTitle title="Administration Page" subtitle="Manage user account and violated posts" style={textCenter}/>
 
                     <Tabs>
                         <TabList>
@@ -284,7 +349,32 @@ class Admin extends React.Component {
                         </TabPanel>
 
                         <TabPanel>
-                            <h3>Displaying User Reports</h3>
+                            <h3>List of violated posts being reported</h3>
+                            <Table selectable={true} onRowHover={this.handleReportRowHover}>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHeaderColumn>Post Topic</TableHeaderColumn>
+                                        <TableHeaderColumn>Author's e-mail</TableHeaderColumn>
+                                        <TableHeaderColumn>Created Date
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn>Actions</TableHeaderColumn>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody showRowHover={true}>
+                                    {this.state.reportPost.map((row, index) => (
+                                        <TableRow key={index} selected={row.selected}>
+                                            <TableRowColumn>{row.title}</TableRowColumn>
+                                            <TableRowColumn>{row.userEmail}</TableRowColumn>
+                                            <TableRowColumn>{row.createdDate}</TableRowColumn>
+                                            <TableRowColumn>
+                                                <IconButton disabled={false} onTouchTap={this.handleDeleteReport}>
+                                                    <ActionDelete/>
+                                                </IconButton>
+                                            </TableRowColumn>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
                         </TabPanel>
 
                     </Tabs>
