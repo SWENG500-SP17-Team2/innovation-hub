@@ -6,6 +6,7 @@ db = connect('localhost:27017/innovationHub');
 db.createCollection('innovations');
 db.createCollection('comments');
 db.createCollection('likes');
+db.createCollection('dislikes');
 var innovations = [];
 
 
@@ -32,7 +33,7 @@ var insertInnovations = db.innovations.insert(
             userEmail: 'User2@mock.com',
             likes: 20,
             dislikes: 50,
-            popularity: 2
+            popularity: 2,
         },
         {
             title: 'Innovation 3',
@@ -125,6 +126,130 @@ var insertComments = db.comments.insert(
 );
 
 var insertLikes = db.likes.insert(
+    [{
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[0],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[1],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[1],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            tCreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+        {
+            parentid: innovations[2],
+            CreatedDate: ISODate(),
+            ModifiedDate: ISODate()
+        },
+    ]
+);
+
+var insertDisikes = db.dislikes.insert(
     [{
             parentid: innovations[0],
             CreatedDate: ISODate(),
