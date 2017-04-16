@@ -101,7 +101,9 @@ gulp.task('start', ['build', 'insert:data'], () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
-        env: { 'NODE_ENV': 'development' }
+        env: {
+            'NODE_ENV': 'development'
+        }
     });
 });
 
@@ -109,7 +111,9 @@ gulp.task('serve', () => {
     nodemon({
         script: 'server/server.js',
         watch: 'server/server.js',
-        env: { 'NODE_ENV': 'development' }
+        env: {
+            'NODE_ENV': 'development'
+        }
     });
 });
 
@@ -121,49 +125,53 @@ gulp.task('watch', ['build'], () => {
 
 gulp.task('copyfiles', () => {
     return gulp.src([
-        'src/**/*',
-        '!src/**/*.jsx',
-        '!src/**/*.js'
-    ])
-    .pipe(gulp.dest('dist'));
+            'src/**/*',
+            '!src/**/*.jsx',
+            '!src/**/*.js'
+        ])
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('buildjs', () => {
     return browserify({
-        entries: 'src/index.js',
-        extensions: ['.jsx'],
-        debug: true
-    })
-    .transform('babelify', { presets: ['es2015', 'react'] })
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('dist'));
+            entries: 'src/index.js',
+            extensions: ['.jsx'],
+            debug: true
+        })
+        .transform('babelify', {
+            presets: ['es2015', 'react']
+        })
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('dist'));
 });
 
-gulp.task('importcss', function () {
-  gulp.src('src/app.css')
-    .pipe(importCss())
-    .pipe(gulp.dest('dist/'));
+gulp.task('importcss', function() {
+    gulp.src('src/app.css')
+        .pipe(importCss())
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('test', ['testbuild'], () => {
     return gulp.src(['test/**/*.spec.js', 'server/**/*.spec.js'])
-    .pipe(tape({
-        reporter: tapMin()
-    }));
+        .pipe(tape({
+            reporter: tapMin()
+        }));
 });
 
 gulp.task('testbuild', ['clean:test'], () => {
     return gulp.src('src/**/*.js')
-    .pipe(babel({ presets: ['es2015'] }))
-    .pipe(gulp.dest('test/client'));
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('test/client'));
 });
 
 gulp.task('lint', () => {
     return gulp.src(['server/**/*.js', 'src/**/*.jsx', 'src/**/*.js', 'gulpfile.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('clean:dist', () => {
@@ -211,8 +219,8 @@ var exec = require('child_process').exec;
 gulp.task('cov', function(cb) {
     "use strict";
     exec('npm run coverage', function(err, stdout, stderr) {
-       console.log(stdout);
-       console.log(stderr);
-       cb(err);
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
     });
 })

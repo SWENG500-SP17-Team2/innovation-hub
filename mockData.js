@@ -10,8 +10,7 @@ var innovations = [];
 
 
 var insertInnovations = db.innovations.insert(
-    [
-        {
+    [{
             title: 'Innovation 1',
             description: 'This is innovation 1s description and has some nice text here',
             image: 'https://static.pexels.com/photos/325229/pexels-photo-325229.jpeg',
@@ -26,7 +25,7 @@ var insertInnovations = db.innovations.insert(
         {
             title: 'Innovation 2',
             description: 'This is innovation 2s description and has some nice text here',
-            image:'https://static.pexels.com/photos/203213/pexels-photo-203213.jpeg',
+            image: 'https://static.pexels.com/photos/203213/pexels-photo-203213.jpeg',
             CreatedDate: ISODate(),
             ModifiedDate: ISODate(),
             user: 'Mock User 2',
@@ -50,14 +49,15 @@ var insertInnovations = db.innovations.insert(
     ]
 )
 
-db.innovations.find({}, { _id: 1 }).forEach(function(innovation) {
+db.innovations.find({}, {
+    _id: 1
+}).forEach(function(innovation) {
     innovations.push(innovation._id);
 });
 
 
 var insertComments = db.comments.insert(
-    [
-        {
+    [{
             parentid: innovations[0],
             text: "This is a comment with a bunch of text just for some show",
             CreatedDate: ISODate(),
@@ -125,8 +125,7 @@ var insertComments = db.comments.insert(
 );
 
 var insertLikes = db.likes.insert(
-    [
-        {
+    [{
             parentid: innovations[0],
             CreatedDate: ISODate(),
             ModifiedDate: ISODate()

@@ -9,41 +9,59 @@ import LocalAuth from './modules/LocalAuth';
 import Admin from './components/Admin';
 
 const routes = {
-   // Base component (wrapper for the whole application)
-   component : TopBase,
+    // Base component (wrapper for the whole application)
+    component: TopBase,
 
-   childRoutes: [
-     {path: '/',
-        getComponent: (location, callback) => {
-           if(LocalAuth.isUserAuthenticated()) {
-             console.log('\n ======= LocalAuth.isAdmin() ' + LocalAuth.isAdmin() +
-                         ' =======\n');
-              if(LocalAuth.isAdmin()) {
-                callback(null, Admin);
-              }
-              else {
-                callback(null, InnovationList);
-                //callback(null, DashboardPage);
-              }
-           } else {
-              callback(null, HomePage);
-           }
-        }
-     },
-     {path: '/login', component: LoginPage},
-     {path: '/signup', component: SignUpPage},
-     {path: '/NewPost', component: PostIdea},
-     {path: '/Dashboard', component: InnovationList},
-     {path: '/ProfilePage', component: ProfilePage},
-     {path: '/Admin', component: Admin},
-     {path: '/logout',
-        onEnter: (nextState, replace) => {
-           LocalAuth.deauthenticateUser();
+    childRoutes: [{
+            path: '/',
+            getComponent: (location, callback) => {
+                if (LocalAuth.isUserAuthenticated()) {
+                    console.log('\n ======= LocalAuth.isAdmin() ' + LocalAuth.isAdmin() +
+                        ' =======\n');
+                    if (LocalAuth.isAdmin()) {
+                        callback(null, Admin);
+                    } else {
+                        callback(null, InnovationList);
+                        //callback(null, DashboardPage);
+                    }
+                } else {
+                    callback(null, HomePage);
+                }
+            }
+        },
+        {
+            path: '/login',
+            component: LoginPage
+        },
+        {
+            path: '/signup',
+            component: SignUpPage
+        },
+        {
+            path: '/NewPost',
+            component: PostIdea
+        },
+        {
+            path: '/Dashboard',
+            component: InnovationList
+        },
+        {
+            path: '/ProfilePage',
+            component: ProfilePage
+        },
+        {
+            path: '/Admin',
+            component: Admin
+        },
+        {
+            path: '/logout',
+            onEnter: (nextState, replace) => {
+                LocalAuth.deauthenticateUser();
 
-           replace('/');
+                replace('/');
+            }
         }
-     }
-   ]
+    ]
 
 };
 

@@ -6,110 +6,102 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class LoginPage extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-    const storedMessage = localStorage.getItem('successMessage');
-    let successMessage = '';
+        const storedMessage = localStorage.getItem('successMessage');
+        let successMessage = '';
 
-    if (storedMessage) {
-      successMessage = storedMessage;
-      localStorage.removeItem('successMessage');
+        if (storedMessage) {
+            successMessage = storedMessage;
+            localStorage.removeItem('successMessage');
+        }
+
+        // set the initial component state
+        this.state = {
+            errors: {},
+            successMessage,
+            user: {
+                email: '',
+                password: ''
+            }
+        };
+
+        this.processForm = this.processForm.bind(this);
+        this.changeUser = this.changeUser.bind(this);
     }
 
-    // set the initial component state
-    this.state = {
-      errors: {},
-      successMessage,
-      user: {
-        email:    '',
-        password: ''
-      }
-    };
+    // Change the user object
+    changeUser(event) {
+        const field = event.target.name;
+        const user = this.state.user;
+        user[field] = event.target.value;
 
-    this.processForm = this.processForm.bind(this);
-    this.changeUser  = this.changeUser.bind(this);
-  }
+        this.setState({user});
+    }
 
-  // Change the user object
-  changeUser(event) {
-    const field = event.target.name;
-    const user  = this.state.user;
-    user[field] = event.target.value;
+    // Process the form
+    processForm(event) {
+        // prevent default action
+        event.preventDefault();
 
-    this.setState({user});
-  }
+        // create a string for an HTTP body message
+        const email = encodeURIComponent(this.state.user.email);
+        const password = encodeURIComponent(this.state.user.password);
+        const formData = `email=${email}&password=${password}`;
 
-  // Process the form
-  processForm(event) {
-    // prevent default action
-    event.preventDefault();
+        // create an AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open('post', '/auth/login');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                // success
 
-    // create a string for an HTTP body message
-    const email = encodeURIComponent(this.state.user.email);
-    const password = encodeURIComponent(this.state.user.password);
-    const formData = `email=${email}&password=${password}`;
+                // Save the token, user and admin priviledge
+                LocalAuth.authenticateUser(xhr.response.token, xhr.response.loginUser.name, xhr.response.loginUser.email, xhr.response.loginUser.admin);
 
-    // create an AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
-        // success
+                // change the component-container state
+                this.setState({errors: {}});
 
-        // Save the token, user and admin priviledge
-        LocalAuth.authenticateUser(xhr.response.token, xhr.response.loginUser.name, xhr.response.loginUser.email, xhr.response.loginUser.admin);
+                // change the current URL to /
+                if (xhr.response.loginUser.admin === 'true') {
+                    this.context.router.replace('/Admin');
+                } else {
+                    this.context.router.replace('/Dashboard');
+                }
+                //this.context.router.replace('/Admin');
+            } else {
+                // failure
 
-        // change the component-container state
-        this.setState({
-          errors: {}
+                // change the component state
+                const errors = xhr.response.errors
+                    ? xhr.response.errors
+                    : {};
+                errors.summary = xhr.response.message;
+
+                this.setState({errors});
+            }
         });
 
-        // change the current URL to /
-        if(xhr.response.loginUser.admin === 'true') {
-           this.context.router.replace('/Admin');
-        } else {
-           this.context.router.replace('/Dashboard');
-        }
-        //this.context.router.replace('/Admin');
-      } else {
-        // failure
+        xhr.send(formData);
+    }
 
-        // change the component state
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
+    // Display the object
+    render() {
 
-        this.setState({
-          errors
-        });
-      }
-    });
+        return (
+            <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+                <LoginForm onSubmit={this.processForm} onChange={this.changeUser} errors={this.state.errors} successMessage={this.state.successMessage} user={this.state.user}/>
+            </MuiThemeProvider>
+        );
 
-    xhr.send(formData);
-}
-
-  // Display the object
-  render() {
-
-    return  (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <LoginForm
-          onSubmit={this.processForm}
-          onChange={this.changeUser}
-          errors={this.state.errors}
-          successMessage={this.state.successMessage}
-          user={this.state.user}
-        />
-      </MuiThemeProvider>
-    );
-
-  }
+    }
 }
 
 LoginPage.contextTypes = {
-  router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 };
 
 export default LoginPage;

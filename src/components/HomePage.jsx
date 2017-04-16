@@ -1,6 +1,13 @@
 import React from 'react';
-import { Card, CardTitle, CardMedia, CardActions } from 'material-ui/Card';
-import { marginMedium, marginXLarge, textCenter, homepageTitle, homepageBackground, homepageSubtitle} from '../styles';
+import {Card, CardTitle, CardMedia, CardActions} from 'material-ui/Card';
+import {
+    marginMedium,
+    marginXLarge,
+    textCenter,
+    homepageTitle,
+    homepageBackground,
+    homepageSubtitle
+} from '../styles';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import ImageGallery from 'react-image-gallery';
@@ -8,55 +15,41 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
-
 class HomePage extends React.Component {
 
-  handleImageLoad(event) {
-    console.log('Image loaded ', event.target)
-  }
+    handleImageLoad(event) {
+        console.log('Image loaded ', event.target)
+    }
 
-  render() {
+    render() {
 
-    const images = [
-      {
-        original: 'http://lorempixel.com/1000/600/nature/1/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/1/',
-      },
-      {
-        original: 'http://lorempixel.com/1000/600/nature/2/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/2/'
-      },
-      {
-        original: 'http://lorempixel.com/1000/600/nature/3/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/3/'
-      },
-      {
-        original: 'http://cdn1.buuteeq.com/upload/18138/llama-at-the-machu-picchu-unesco-peru-andbeyond.jpg',
-        thumbnail: 'http://cdn1.buuteeq.com/upload/18138/llama-at-the-machu-picchu-unesco-peru-andbeyond.jpg'
-      }
-    ]
+        const images = [
+            {
+                original: 'http://lorempixel.com/1000/600/nature/1/',
+                thumbnail: 'http://lorempixel.com/250/150/nature/1/'
+            }, {
+                original: 'http://lorempixel.com/1000/600/nature/2/',
+                thumbnail: 'http://lorempixel.com/250/150/nature/2/'
+            }, {
+                original: 'http://lorempixel.com/1000/600/nature/3/',
+                thumbnail: 'http://lorempixel.com/250/150/nature/3/'
+            }, {
+                original: 'http://cdn1.buuteeq.com/upload/18138/llama-at-the-machu-picchu-unesco-peru-andbeyond.jpg',
+                thumbnail: 'http://cdn1.buuteeq.com/upload/18138/llama-at-the-machu-picchu-unesco-peru-andbeyond.jpg'
+            }
+        ]
 
-    return (
-    <div>
-      <Card className="container"  style={homepageBackground}>
-          <CardTitle title="Innovation Hub" titleStyle={homepageTitle}
-                   subtitle="A Place to Share Ideas" subtitleStyle={homepageSubtitle}
-                 />
-       <CardMedia>
-        <ImageGallery
-          items={images}
-          slideInterval={5000}
-          autoPlay={true}
-          showPlayButton = {false}
-          showFullscreenButton = {false}
-          disableArrowKeys = {false}
-          showBullets = {true}/>
-        </CardMedia>
-       </Card>
-    </div>
-    );
-  }
+        return (
+            <div>
+                <Card className="container" style={homepageBackground}>
+                    <CardTitle title="Innovation Hub" titleStyle={homepageTitle} subtitle="A Place to Share Ideas" subtitleStyle={homepageSubtitle}/>
+                    <CardMedia>
+                        <ImageGallery items={images} slideInterval={5000} autoPlay={true} showPlayButton={false} showFullscreenButton={false} disableArrowKeys={false} showBullets={true}/>
+                    </CardMedia>
+                </Card>
+            </div>
+        );
+    }
 
 }
 

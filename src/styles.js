@@ -31,7 +31,7 @@ const style = {
 };
 
 const textCenter = {
-  textAlign: 'center'
+    textAlign: 'center'
 };
 
 const topBar = {
@@ -64,12 +64,12 @@ const bottomBar = {
 };
 
 const ProfileStyle = {
-  margin: 20,
+    margin: 20,
 };
 
 const FaceIconStyle = {
-  height: 20,
-  width: 20,
+    height: 20,
+    width: 20,
 };
 
 const topBarLeft = {
@@ -101,24 +101,24 @@ const ideaCardList = {
     display: 'flex'
 };
 const homepageBackground = {
-  backgroundColor: '#009688',
-  maxWidth: '650px',
-  margin: 'auto',
-  justifyContent: 'center'
+    backgroundColor: '#009688',
+    maxWidth: '650px',
+    margin: 'auto',
+    justifyContent: 'center'
 };
 
 const changePasswordCardStyle = {
-  textAlign: 'center',
-  backgroundColor: '#E0EFF1'
+    textAlign: 'center',
+    backgroundColor: '#E0EFF1'
 };
 
 const ideaCardActionBar = {
-    paddingRight:'40px',
-    paddingLeft:'40px'
+    paddingRight: '40px',
+    paddingLeft: '40px'
 };
 
 const subTabStyle = {
-  backgroundColor:"#009688"
+    backgroundColor: "#009688"
 };
 export {
     marginSmall,
