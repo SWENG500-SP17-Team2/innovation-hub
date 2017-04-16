@@ -110,6 +110,7 @@ console.log('Server listening on port ' + chalk.green(port));
 var INNOVATIONS_COLLECTION = "innovations";
 var COMMENTS_COLLECTION = "comments";
 var LIKES_COLLECTION = "likes";
+var DISLIKES_COLLECTION = "dislikes";
 
 function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
@@ -322,6 +323,56 @@ app.get("/api/likes/:parentid", function(req, res) {
     }).toArray(function(err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get likes.");
+        } else {
+            res.status(200).json(docs);
+        }
+    });
+});
+
+////////////
+//DISLIKES//
+////////////
+
+
+app.post("/api/dislikes", function(req, res) {
+    var newDislike = req.body;
+
+    if (!req.body.parentid) {
+        handleError(res, "Invalid user input", "Must provide a ParentID.", 400);
+    } else {
+        newDislike.parentid = new ObjectID(newDislike.parentid);
+
+        newDislike.CreatedDate = new Date();
+        newDislike.ModifiedDate = new Date();
+
+        db.collection(DISLIKES_COLLECTION).insertOne(newDislike, function(err, doc) {
+            if (err) {
+                handleError(res, err.message, "Failed to create dislike.");
+            } else {
+                res.status(201).json(doc.ops[0]);
+            }
+        });
+    }
+});
+
+app.get("/api/dislikes", function(req, res) {
+    db.collection(DISLIKES_COLLECTION).find({}).toArray(function(err, docs) {
+        if (err) {
+            handleError(res, err.message, "Failed to get dislikes.");
+        } else {
+            res.status(200).json(docs);
+        }
+    });
+});
+
+
+app.get("/api/dislikes/:parentid", function(req, res) {
+    //TODO Better error message if ID is not found in database
+    db.collection(DISLIKES_COLLECTION).find({
+        parentid: new ObjectID(req.params.parentid)
+    }).toArray(function(err, docs) {
+        if (err) {
+            handleError(res, err.message, "Failed to get dislikes.");
         } else {
             res.status(200).json(docs);
         }

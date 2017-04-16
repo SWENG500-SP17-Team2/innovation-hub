@@ -26,6 +26,7 @@ class ActionBar extends React.Component {
             errors: {},
             comments: [],
             likes: [],
+            dislikes: [],
             showComments: false,
             textFieldDescription: '',
             open: false,
@@ -36,6 +37,7 @@ class ActionBar extends React.Component {
         this.handleDescriptionFieldChange = this.handleDescriptionFieldChange.bind(this);
         this.toggleComments = this.toggleComments.bind(this);
         this.submitLike = this.submitLike.bind(this);
+        this.submitDislike = this.submitDislike.bind(this);
         this.refresh = this.refresh.bind(this);
         this.submitComment = this.submitComment.bind(this);
         this.reportItem = this.reportItem.bind(this);
@@ -78,6 +80,19 @@ class ActionBar extends React.Component {
             }
         });
         xhr2.send();
+
+        const xhr3 = new XMLHttpRequest();
+        xhr3.open('get', '/api/dislikes/' + this.props.id);
+        xhr3.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // set the authorization HTTP header
+        xhr3.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+        xhr3.responseType = 'json';
+        xhr3.addEventListener('load', () => {
+            if (xhr3.status === 200) {
+                this.setState({dislikes: xhr3.response});
+            }
+        });
+        xhr3.send();
     }
 
     toggleComments() {
@@ -178,6 +193,54 @@ class ActionBar extends React.Component {
         this.handleTouchTap('Like Submitted!');
     }
 
+    submitDislike() {
+        // prevent default action
+        event.preventDefault();
+
+        // Create a string for an HTTP body message
+        const name = encodeURIComponent(LocalAuth.getAuthenticatedUser());
+        const email = encodeURIComponent(LocalAuth.getAuthenticatedEmail());
+        const parentId = encodeURIComponent(this.props.id);
+        var adminTF = false;
+
+        const formData = `user=${name}&parentid=${parentId}&userEmail=${email}`;
+
+        // Create an AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open('post', 'api/dislikes');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status == 200) {
+                // Success
+
+                this.setState({errors: {}});
+
+                // Set a message
+                localStorage.setItem('successMessage', xhr.response.message);
+
+                // Make a redirect
+                this.context.router.replace('/login');
+
+            } else {
+                // Failure
+
+                const errors = xhr.response.errors
+                    ? xhr.response.errors
+                    : {};
+                errors.summary = xhr.response.message;
+
+                this.setState({errors});
+            }
+
+        });
+
+        xhr.send(formData);
+        this.refresh();
+
+        this.handleTouchTap('Disike Submitted!');
+    }
+
     reportItem() {
         // prevent default action
         event.preventDefault();
@@ -224,6 +287,11 @@ class ActionBar extends React.Component {
                             paddingRight: '10px'
                         }} src="../assets/thumb-up-icon.png"/>{this.state.likes.length}
                         Likes</div>
+                    <div onClick={this.submitDislike} style={ideaCardActionBar}>
+                        <img style={{
+                            paddingRight: '10px'
+                        }} src="../assets/thumb-down-icon.png"/>{this.state.dislikes.length}
+                        Disikes</div>
                     <div style={ideaCardActionBar} onClick={this.reportItem}>
                         <img style={{
                             paddingRight: '10px'
