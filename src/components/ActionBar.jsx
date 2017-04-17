@@ -210,6 +210,7 @@ class ActionBar extends React.Component {
         const xhr = new XMLHttpRequest();
         xhr.open('post', 'api/dislikes');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             if (xhr.status == 200) {
