@@ -31,18 +31,15 @@ class InnovationGraph extends React.Component {
         super(props);
 
         this.state = {
-            data: [
-                {
-                    name: 'Idea 1',
-                    popularity: 4
-                }, {
-                    name: 'Idea 2',
-                    popularity: 2
-                }
-            ]
+            data: [],
+            graphdata: [],
+            postNum: ''
         };
 
-        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.queryPost = this.queryPost.bind(this);
+        this.queryLikes = this.queryLikes.bind(this);
+        this.queryDisLikes = this.queryDisLikes.bind(this);
     }
 
     rankPopularity(pos, n) {
@@ -53,8 +50,11 @@ class InnovationGraph extends React.Component {
         return (phat + z * z / (2 * n) - z * Math.sqrt((phat * (1 - phat) + z * z / (4 * n)) / n)) / (1 + z * z / n);
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        this.queryPost();
+    }
 
+    queryPost() {
         const xhr = new XMLHttpRequest();
         xhr.open('get', '/api/innovations');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -63,20 +63,71 @@ class InnovationGraph extends React.Component {
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
+                //var PostStr = JSON.stringify(xhr.response.InnovationDocs);
+                //console.log('\nPostStr: ' + PostStr);
+
                 const innovationdata = xhr.response.InnovationDocs;
-                var graphdata = [];
+                this.setState({postNum: innovationdata.length});
                 for (var i = 0; i < innovationdata.length; i++) {
-                    var positiveVotes = innovationdata[i]['likes'];
-                    var totalVotes = positiveVotes + innovationdata[i]['dislikes'];
-                    graphdata.push({
-                        name: innovationdata[i]['title'],
-                        popularity: this.rankPopularity(positiveVotes, totalVotes)
-                    });
+                   var title = innovationdata[i]['title'];
+                   this.queryLikes(title,innovationdata[i]['_id']);
                 }
-                this.setState({data: graphdata});
             }
         });
         xhr.send();
+
+    }
+
+    queryLikes(title, id) {
+       const xhr2 = new XMLHttpRequest();
+       xhr2.open('get', '/api/likes/' + id);
+       xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       // set the authorization HTTP header
+       xhr2.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+       xhr2.responseType = 'json';
+       xhr2.addEventListener('load', () => {
+           if (xhr2.status === 200) {
+               var positiveVotes = xhr2.response.length;
+               this.queryDisLikes(title, id, positiveVotes);
+           }
+       });
+       xhr2.send();
+    }
+
+    queryDisLikes(title, id, positiveVotes) {
+       const xhr3 = new XMLHttpRequest();
+       xhr3.open('get', '/api/dislikes/' + id);
+       xhr3.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       // set the authorization HTTP header
+       xhr3.setRequestHeader('Authorization', `bearer ${LocalAuth.getToken()}`);
+       xhr3.responseType = 'json';
+       xhr3.addEventListener('load', () => {
+           if (xhr3.status === 200) {
+               var negativeVotes = xhr3.response.length;
+               var totalVotes = positiveVotes + negativeVotes;
+               var rankPopularity = 0;
+               console.log('\ntitle: ' + title +
+                           '\nid: ' + id +
+                           '\nlikes: ' + positiveVotes +
+                           '\ndislikes: ' + negativeVotes +
+                           '\ntotalVotes: ' + totalVotes);
+               if (totalVotes > 0) {
+                  rankPopularity = this.rankPopularity(positiveVotes, totalVotes)
+               }
+               this.state.graphdata.push({
+                   name: title,
+                   popularity: rankPopularity
+               });
+
+               // Update the graph data object
+               if(this.state.graphdata.length > this.state.postNum - 1) {
+                  this.setState({data: this.state.graphdata});
+                  this.setState({graphdata:  ''});
+               }
+
+           }
+       });
+       xhr3.send();
 
     }
 
