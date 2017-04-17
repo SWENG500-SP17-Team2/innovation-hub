@@ -7,6 +7,7 @@ import ProfilePage from './components/ProfilePage';
 import InnovationList from './components/InnovationList';
 import LocalAuth from './modules/LocalAuth';
 import Admin from './components/Admin';
+import InnovationGraph from './components/InnovationGraph';
 
 const routes = {
     // Base component (wrapper for the whole application)
@@ -22,7 +23,6 @@ const routes = {
                         callback(null, Admin);
                     } else {
                         callback(null, InnovationList);
-                        //callback(null, DashboardPage);
                     }
                 } else {
                     callback(null, HomePage);
@@ -52,6 +52,10 @@ const routes = {
         {
             path: '/Admin',
             component: Admin
+        },
+        {
+            path: '/InnovationGraph',
+            component: InnovationGraph
         },
         {
             path: '/logout',
