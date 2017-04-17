@@ -56,11 +56,10 @@ class InnovationList extends React.Component {
         return (
             <div style={ideaCardList}>
                 {this.state.innovations.map(function(item) {
-                    return <IdeaCard idea={item}/>
-                })
-}
-                <br/>
-                <InnovationGraph/>
+                       return <IdeaCard idea={item}/>
+                   })
+                }
+
             </div>
         );
     }
