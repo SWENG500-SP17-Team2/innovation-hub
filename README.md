@@ -1,5 +1,30 @@
+# Innovation Hub
+This hub for innovation was designed as a part of a senior design project.  It is a social network for innovation within a company.  This is perfect for the ideation and filtering stages of innovation, crowdsourcing ideas and improving them with collaboration.
 
-[![Build Status](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub.svg?branch=master)](https://travis-ci.org/SWENG500-SP17-Team2/innovation-hub)
+The main technologies it is built on are: [React](https://facebook.github.io/react/), [NodeJS](https://nodejs.org/en/), and [MongoDB](https://www.mongodb.com/).
+
+## Functionality
+
+#### Basics
+Creating ideas
+Commenting
+Liking / Disliking
+Reporting
+Idea popularity Graph
+
+#### Administrative
+Viewing / Deleting reported items
+Locking User Accounts
+
+
+## TODO
+As with any software, there are always plenty of todo items which weren't possible due to time constraints.
+- [ ] General UI Improvements
+- [ ] Fully utilize Mongoose
+- [ ] Idea filtering
+- [ ] Sort by Idea popularity
+
+
 
 
 ## Getting started now
